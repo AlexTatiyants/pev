@@ -1,0 +1,50 @@
+<div class="plan-node">
+   <header (click)="showDetails = !showDetails">
+      <h4>{{node['Node Type'] | uppercase}}</h4>
+      <span class="node-duration">{{duration}}<span class="text-muted">{{durationUnit}} | </span>
+      <strong>{{executionTimePercent}}</strong><span class="text-muted">%</span>
+      </span>
+   </header>
+
+   <div class="relation-name" *ngIf="node['Relation Name']"><span class="text-muted">on </span>
+      <span *ngIf="node['Schema']">{{node['Schema']}}.</span>{{node['Relation Name']}}
+      <span *ngIf="node['Alias']"> ({{node['Alias']}})</span>
+   </div>
+
+   <div class="relation-name" *ngIf="node['Group Key']"><span class="text-muted">by</span> {{node['Group Key']}}</div>
+   <div class="relation-name" *ngIf="node['Sort Key']"><span class="text-muted">by</span> {{node['Sort Key']}}</div>
+   <div class="relation-name" *ngIf="node['Join Type']">{{node['Join Type']}} <span class="text-muted">join</span></div>
+   <div class="relation-name" *ngIf="node['Index Name']"><span class="text-muted">using</span> {{node['Index Name']}}</div>
+
+   <div class="tags" *ngIf="viewOptions.showTags && tags.length > 0">
+      <span *ngFor="#tag of tags">{{tag}}</span>
+   </div>
+
+   <div *ngIf="currentHighlightType !== highlightTypes.NONE">
+      <div class="node-bar-container" [style.width]="(MAX_WIDTH+3)+'px'">
+         <span class="node-bar" [style.width]="width+'px'" [style.backgroundColor]="backgroundColor"></span>
+      </div>
+      <span class="node-bar-label">
+         <span class="text-muted">{{viewOptions.highlightType}}:</span> {{highlightValue | number:'.0-2'}}
+      </span>
+   </div>
+
+   <div class="planner-estimate" *ngIf="viewOptions.showPlannerEstimate">
+      <span *ngIf="plannerRowEstimateDirection === estimateDirections.over"><strong>over</strong> estimated rows</span>
+      <span *ngIf="plannerRowEstimateDirection === estimateDirections.under"><strong>under</strong> estimated rows</span>
+      <span> by <strong>{{plannerRowEstimateValue}}</strong>x</span>
+   </div>
+
+   <table  *ngIf="showDetails" class="table prop-list">
+      <tr *ngFor="#prop of props">
+         <td width="40%">{{prop.key}}</td>
+         <td>{{prop.value}}</td>
+      <tr>
+   </table>
+</div>
+
+<ul *ngIf="node.Plans">
+  <li *ngFor="#subNode of node.Plans">
+    <plan-node [node]="subNode" [viewOptions]="viewOptions" [planStats]="planStats"></plan-node>
+  </li>
+</ul>

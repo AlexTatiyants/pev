@@ -1,0 +1,10 @@
+nav {
+  font-size: round($font-size-base * 1.3);
+  background-color: #fff;
+  padding: round($padding-lg * 1.5);
+
+  .nav-container {
+    width: $page-width;
+    margin: auto;
+  }
+}

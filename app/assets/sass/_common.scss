@@ -1,0 +1,53 @@
+html {
+	height: 100%;
+}
+
+body {
+	font-size: $font-size-base;
+	font-weight: 300;
+	color: $text-color;
+	height: 100%;
+	width: 100%;
+	background-color: $bg-color;
+	line-height: $line-height-base;
+}
+
+strong {
+	font-weight: 600;
+}
+
+body, input, a, button, textarea {
+	font-family: $font-family-sans-serif;
+	font-weight: 300;
+}
+
+.text-muted {
+	color: $text-color-light;
+}
+
+.hero-container {
+   margin: $padding-lg * 3;
+   font-size: $font-size-xl;
+   text-align: center;
+}
+
+.pull-right {
+	float: right;
+}
+
+.align-right {
+   text-align: right;
+}
+
+a {
+	color: $link-color;
+	text-decoration: none;
+}
+
+.fa {
+	margin-right: $padding-sm;
+}
+
+.clickable {
+   cursor: pointer;
+}

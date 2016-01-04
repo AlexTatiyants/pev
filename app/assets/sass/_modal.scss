@@ -1,0 +1,52 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    opacity: 0.7;
+}
+
+.modal {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1050;
+
+   .modal-dialog {
+      position: relative;
+      transform: translate(0);
+      margin: 30px auto;
+      width: 500px;
+      opacity: 1;
+
+      .modal-content {
+         padding: 30px;
+         position: relative;
+         background-color: #fff;
+         background-clip: padding-box;
+         border: 1px solid #999;
+         border: 1px solid rgba(0,0,0,.2);
+         border-radius: 6px;
+         outline: 0;
+         box-shadow: 0 3px 9px rgba(0,0,0,.5);
+         display: block;
+
+         .modal-body {
+            padding: $padding-sm;
+         }
+
+         .modal-footer {
+            text-align: right;
+
+            button {
+               margin-left: $padding-sm;
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= APP_TITLE %></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+  <app>Loading...</app>
+
+  <!-- shims:js -->
+  <!-- endinject -->
+
+  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <script>
+    System.import('bootstrap');
+  </script>
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+</body>
+</html>

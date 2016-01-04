@@ -1,0 +1,14 @@
+footer {
+   border-top: 2px solid $gray-light;
+   margin: round($padding-lg * 2);
+   padding: round($padding-lg * 2);
+   color: $gray;
+   text-align: center;
+   width: 600px;
+   margin: auto;
+
+   .fa {
+      font-size: $font-size-lg;
+      margin-left: $padding-base;
+   }
+}

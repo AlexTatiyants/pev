@@ -1,0 +1,47 @@
+.btn {
+  border-radius: $border-radius-base;
+  padding: $padding-base $padding-lg;
+  font-size: $font-size-base;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &-default {
+    border: 1px solid $blue;
+    color: $blue;
+    background-color: #fff;
+
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+
+  &-lg {
+    padding: $padding-base $padding-lg*2;
+    font-size: round($font-size-base * 1.2);
+  }
+
+  &-danger {
+    border: 1px solid $red;
+    color: $red;
+    text-transform: uppercase;
+    background-color: #fff;
+
+    &:hover {
+      background-color: $light-red;
+    }
+  }
+
+  &-primary {
+    border: 0;
+    background: $blue;
+   //  background-image: linear-gradient(to bottom, $blue, $dark-blue);
+    box-shadow: 1px 1px 1px $gray;
+    color: #ffffff;
+
+    &:hover {
+      background: $dark-blue;
+      // background-image: linear-gradient(to bottom, $dark-blue, $blue);
+    }
+  }
+}

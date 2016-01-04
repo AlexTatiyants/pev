@@ -1,0 +1,12 @@
+.table {
+  width: 100%;
+
+  td {
+    border-bottom: 1px solid $line-color;
+    padding: $padding-base;
+  }
+
+  tr:hover {
+    background-color: $gray-lightest;
+  }
+}

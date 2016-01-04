@@ -1,0 +1,111 @@
+.plan-node {
+   text-decoration: none;
+   color: $text-color;
+   display: inline-block;
+   transition: all 0.5s;
+   position: relative;
+   padding: $padding-base $padding-lg;
+	background-color: #fff;
+	font-size: $font-size-sm;
+	border: 2px solid $line-color;
+	border-radius: $border-radius-base;
+   overflow: hidden;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+   word-break: break-all;
+   min-width: 220px;
+
+   header {
+      margin-bottom: $padding-base;
+      overflow: hidden;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $gray-lightest;
+      }
+
+      h4 {
+         font-size: $font-size-base;
+         float: left;
+         font-weight: 600;
+      }
+
+      .node-duration {
+         float: right;
+         margin-left: $padding-lg;
+         font-size: $font-size-base;
+      }
+   }
+
+   .prop-list {
+      float: left;
+      text-align: left;
+      width: 400px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin-top: $padding-lg;
+      margin-bottom: $padding-base;
+   }
+
+   .relation-name {
+     text-align: left;
+     max-width: 220px;
+   }
+
+   .planner-estimate {
+     float: left;
+   	clear: both;
+   	text-align: left;
+   	margin-top: $padding-base;
+   	width: 100%;
+   }
+
+   .tags {
+      margin-top: $padding-base;
+      text-align: left;
+
+      span {
+         display: inline-block;
+         background-color: $alert-color;
+         color: #fff;
+         font-size: round($font-size-sm * 0.8);
+         font-weight: 600;
+         margin-right: $padding-sm;
+         padding: $padding-sm;
+         border-radius: $border-radius-base;
+         line-height: 1.1;
+      }
+   }
+
+   //hovers
+   &:hover {
+     border-color: $highlight-color;
+   }
+}
+
+.node-bar-container {
+   float: left;
+   height: 5px;
+   margin-top: $padding-base;
+   margin-left: auto;
+   margin-right: auto;
+   border: 1px solid $line-color;
+   border-radius: $border-radius-base;
+   color: #fff;
+   background-color: $gray-darkest;
+   position: relative;
+
+   .node-bar {
+      height: 100%;
+      text-align: left;
+      position: absolute;
+      left: 0;
+      top: 0;
+   }
+}
+
+.node-bar-label {
+   text-align: left;
+   display: block;
+}

@@ -1,0 +1,17 @@
+.page {
+  padding-top: $padding-lg;
+  margin: auto;
+  width: $page-width;
+  min-height: 600px;
+
+    h2 {
+      font-size: round($font-size-base * 2);
+      margin-bottom: $padding-base;
+    }
+}
+
+.page-stretch {
+  @extend .page;
+  margin: auto;
+  width: 95%;
+}

@@ -1,0 +1,72 @@
+<div class="menu" [class.menu-hidden]="hideMenu">
+   <header>
+      <i class="fa fa-cogs menu-toggle" (click)="hideMenu = !hideMenu"></i>
+      <h3>display options</h3>
+   </header>
+
+   <ul>
+      <li>
+         <input id="showPlanStats" type="checkbox" [(ngModel)]="viewOptions.showPlanStats">
+         <label class="clickable" for="showPlanStats"> show plan stats</label>
+      </li>
+
+      <li>
+         <input id="showPlannerEstimate" type="checkbox" [(ngModel)]="viewOptions.showPlannerEstimate">
+         <label class="clickable" for="showPlannerEstimate"> show planner estimate</label>
+      </li>
+
+      <li>
+         <input id="showTags" type="checkbox" [(ngModel)]="viewOptions.showTags">
+         <label class="clickable" for="showTags"> show analysis tags</label>
+      </li>
+
+      <li>
+         <label>graph metric: </label>
+         <select [(ngModel)]="viewOptions.highlightType">
+            <option value="{{highlightTypes.NONE}}">{{highlightTypes.NONE}}</option>
+            <option value="{{highlightTypes.DURATION}}">{{highlightTypes.DURATION}}</option>
+            <option value="{{highlightTypes.ROWS}}">{{highlightTypes.ROWS}}</option>
+            <option value="{{highlightTypes.COST}}">{{highlightTypes.COST}}</option>
+         </select>
+      </li>
+   </ul>
+</div>
+
+<nav>
+   <div class="nav-container">
+      <a [routerLink]="['PlanList']">plans</a><span class="text-muted"> / </span>{{plan.name}}
+   </div>
+</nav>
+
+<div class="page page-stretch">
+   <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
+      <div>
+         <span class="stat-value">{{executionTime}}</span>
+         <span class="stat-label">execution time ({{executionTimeUnit}})</span>
+      </div>
+      <div *ngIf="planStats.planningTime">
+         <span class="stat-value">{{planStats.planningTime | number:'.0-2'}}</span>
+         <span class="stat-label">planning time (ms)</span>
+      </div>
+      <div *ngIf="planStats.maxDuration">
+         <span class="stat-value">{{planStats.maxDuration | number:'.0-2'}}</span>
+         <span class="stat-label">slowest node (ms)</span>
+      </div>
+      <div *ngIf="planStats.maxRows">
+         <span class="stat-value">{{planStats.maxRows | number:'.0-2'}}</span>
+         <span class="stat-label">largest node (rows)</span>
+      </div>
+      <div *ngIf="planStats.maxCost">
+         <span class="stat-value">{{planStats.maxCost | number:'.0-2'}}</span>
+         <span class="stat-label">costliest node</span>
+      </div>
+   </div>
+
+   <div class="plan">
+      <ul>
+         <li>
+            <plan-node [node]="rootContainer.Plan" [planStats]="planStats" [viewOptions]="viewOptions"></plan-node>
+         </li>
+      </ul>
+   </div>
+</div>

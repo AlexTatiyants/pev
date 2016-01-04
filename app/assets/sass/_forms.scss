@@ -1,0 +1,33 @@
+@import "compass/css3/user-interface";
+
+.input-box {
+  @include input-placeholder {
+    color: $gray;
+    font-size: round($font-size-base * 1.4);
+  }
+
+  &:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  }
+
+  &-main {
+    font-size: round($font-size-base * 1.4);
+    width: 700px;
+    border: 0;
+    border-bottom: 2px solid $blue;
+    padding: $padding-lg;
+    margin-top: $padding-lg;
+    margin-bottom: $padding-lg;
+  }
+
+    &-lg {
+      width: 100%;
+      height: 280px;
+      margin-bottom: $padding-base;
+      margin-bottom: $padding-lg;
+      border-radius: $border-radius-base;
+      border: 1px solid $line-color;
+      padding: $padding-lg;
+    }
+
+}
