@@ -32,13 +32,8 @@
    </ul>
 </div>
 
-<nav>
-   <div class="nav-container">
-      <a [routerLink]="['PlanList']">plans</a><span class="text-muted"> / </span>{{plan.name}}
-   </div>
-</nav>
-
 <div class="page page-stretch">
+   <h2>{{plan.name}}</h2>
    <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
       <div>
          <span class="stat-value">{{executionTime}}</span>

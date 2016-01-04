@@ -14,4 +14,16 @@
   @extend .page;
   margin: auto;
   width: 95%;
+
+  h2 {
+     text-align: left;
+     font-size: $font-size-lg;
+     max-width: $page-width;
+     margin: auto;
+
+     .sub-title {
+        font-size: $font-size-base;
+        font-style: italic;
+     }
+ }
 }

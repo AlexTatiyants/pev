@@ -5,6 +5,6 @@ import {Pipe} from 'angular2/core';
 
 export class MomentDatePipe {
   transform(value:string, args:string[]) : any {
-    return moment(value).format('LLLL');
+    return moment(value).format('LLL');
   }
 }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {IPlan} from '../../interfaces/iplan';
 import {PlanService} from '../../services/plan-service';

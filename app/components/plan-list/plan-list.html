@@ -1,10 +1,3 @@
-<nav>
-   <div class="nav-container">
-   <a class="btn btn-primary btn-lg pull-right" [routerLink]="['/PlanNew']">create</a>
-   <a [routerLink]="['PlanList']">plans</a>
-   </div>
-</nav>
-
 <div class="page">
    <div class="hero-container" *ngIf="plans.length === 0">
       Welcome to PEV! Please <a [routerLink]="['/PlanNew']">submit</a> a plan for visualization
