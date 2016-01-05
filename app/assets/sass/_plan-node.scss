@@ -41,7 +41,6 @@
    .prop-list {
       float: left;
       text-align: left;
-      width: 400px;
       overflow-wrap: break-word;
       word-wrap: break-word;
       word-break: break-all;
@@ -51,7 +50,6 @@
 
    .relation-name {
      text-align: left;
-     max-width: 220px;
    }
 
    .planner-estimate {
@@ -83,6 +81,20 @@
    &:hover {
      border-color: $highlight-color;
    }
+
+   .node-description {
+      text-align: left;
+      font-style: italic;
+      padding-top: $padding-lg;
+      word-break: normal;
+
+      .node-type {
+         font-weight: 600;
+         background-color: $blue;
+         color: #fff;
+         padding: 0 $padding-base;
+      }
+   }
 }
 
 .node-bar-container {
@@ -109,4 +121,8 @@
 .node-bar-label {
    text-align: left;
    display: block;
+}
+
+.expanded {
+   width: 400px;
 }

@@ -12,7 +12,13 @@ export class PlanService {
     ACTUAL_LOOPS_PROP: string = 'Actual Loops';
     TOTAL_COST_PROP: string = 'Total Cost';
     PLANS_PROP: string = 'Plans';
-
+    RELATION_NAME_PROP: string = 'Relation Name';
+    SCHEMA_PROP: string = 'Schema';
+    ALIAS_PROP: string = 'Alias';
+    GROUP_KEY_PROP: string = 'Group Key';
+    SORT_KEY_PROP: string = 'Sort Key';
+    JOIN_TYPE_PROP: string = 'Join Type';
+    INDEX_NAME_PROP: string = 'Index Name';
 
     // computed by pev
     COMPUTED_TAGS_PROP: string = "*Tags";
