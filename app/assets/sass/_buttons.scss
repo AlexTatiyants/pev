@@ -5,6 +5,8 @@
   line-height: 1.2;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
+  margin-left: $padding-base;
 
   &-default {
     border: 1px solid $blue;
@@ -13,6 +15,7 @@
 
     &:hover {
       background-color: $light-blue;
+      color: #fff;
     }
   }
 
@@ -20,6 +23,15 @@
     padding: $padding-base $padding-lg*2;
     font-size: round($font-size-base * 1.2);
   }
+
+  &-sm {
+     padding: $padding-base $padding-base;
+    font-size: round($font-size-base * 0.9);
+ }
+
+ &-slim {
+    .fa { margin: 0};
+}
 
   &-danger {
     border: 1px solid $red;
@@ -44,4 +56,12 @@
       // background-image: linear-gradient(to bottom, $dark-blue, $blue);
     }
   }
+
+  &-close {
+     @extend .btn-slim;
+     border-radius: 50%;
+     box-shadow: 0;
+     border: 1px solid $line-color;
+     background-color: #fff;
+ }
 }

@@ -12,11 +12,14 @@
 <body>
 
   <app>Loading...</app>
-
   <!-- shims:js -->
   <!-- endinject -->
 
-  <script>System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)</script>
+  <script>
+   System.config(<%= JSON.stringify(SYSTEM_CONFIG) %>)
+   // window.define = System.amdDefine;
+   // window.require = window.requirejs = System.amdRequire;
+  </script>
 
   <!-- libs:js -->
   <!-- endinject -->

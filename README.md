@@ -4,7 +4,7 @@ Postgres Explain Visualizer (dev) is designed to make [EXPLAIN](http://www.postg
 
 Pev is heavily influenced by the excellent [explain.depesz.com](http://explain.depesz.com/).
 
-Pev is written in [angular 2](https://angular.io/) with TypeScript. It requires [npm](https://www.npmjs.com/), [gulp](), [tsd](http://definitelytyped.org/tsd/), and [compass](http://compass-style.org/).
+Pev is written in [angular 2](https://angular.io/) with TypeScript. It's based on [angular2 seed](https://github.com/mgechev/angular2-seed) and requires [npm](https://www.npmjs.com/), [gulp](), [tsd](http://definitelytyped.org/tsd/), and [compass](http://compass-style.org/).
 
 ## Installation
 

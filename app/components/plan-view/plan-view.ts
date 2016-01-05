@@ -2,15 +2,16 @@ import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {IPlan} from '../../interfaces/iplan';
-import {PlanService} from '../../services/plan-service';
 import {HighlightType} from '../../enums';
 import {PlanNode} from '../plan-node/plan-node';
+import {PlanService} from '../../services/plan-service';
+import {SyntaxHighlightService} from '../../services/syntax-highlight-service';
 
 @Component({
     selector: 'plan-view',
     templateUrl: './components/plan-view/plan-view.html',
     directives: [ROUTER_DIRECTIVES, PlanNode],
-    providers: [PlanService]
+    providers: [PlanService, SyntaxHighlightService]
 })
 export class PlanView {
     id: string;
@@ -19,13 +20,6 @@ export class PlanView {
     executionTime: string;
     executionTimeUnit: string;
     hideMenu: boolean = true;
-
-    planStats: any = {
-        executionTime: 0,
-        maxRows: 0,
-        maxCost: 0,
-        maxDuration: 0
-    };
 
     viewOptions: any = {
         showPlanStats: true,
@@ -40,7 +34,7 @@ export class PlanView {
 
     highlightTypes = HighlightType; // exposing the enum to the view
 
-    constructor(private _planService: PlanService, routeParams: RouteParams) {
+    constructor(private _planService: PlanService, routeParams: RouteParams, private _syntaxHighlightService: SyntaxHighlightService) {
         this.id = routeParams.get('id');
     }
 
@@ -55,13 +49,17 @@ export class PlanView {
         var executionTime: number = this.rootContainer['Execution Time'] || this.rootContainer['Total Runtime'];
         [this.executionTime, this.executionTimeUnit] = this.calculateDuration(executionTime);
 
-        this.planStats = {
+        this.plan.planStats = {
             executionTime: executionTime,
-            planningTime: this.rootContainer['Planning Time'],
-            maxRows: this.rootContainer[this._planService.MAXIMUM_ROWS_PROP],
-            maxCost: this.rootContainer[this._planService.MAXIMUM_COSTS_PROP],
-            maxDuration: this.rootContainer[this._planService.MAXIMUM_DURATION_PROP]
+            planningTime: this.rootContainer['Planning Time'] || 0,
+            maxRows: this.rootContainer[this._planService.MAXIMUM_ROWS_PROP] || 0,
+            maxCost: this.rootContainer[this._planService.MAXIMUM_COSTS_PROP] || 0,
+            maxDuration: this.rootContainer[this._planService.MAXIMUM_DURATION_PROP] || 0
         }
+
+        // get syntax highlighted query
+        this._syntaxHighlightService.init();
+        this.plan.formattedQuery = this._syntaxHighlightService.highlight(this.plan.query);
     }
 
     ngOnInit() {

@@ -1,14 +1,16 @@
+import {IPlan} from '../../interfaces/iplan';
 import {Component, OnInit} from 'angular2/core';
 import {HighlightType, EstimateDirection} from '../../enums';
 import {PlanService} from '../../services/plan-service';
+import {SyntaxHighlightService} from '../../services/syntax-highlight-service';
 /// <reference path="lodash.d.ts" />
 
 @Component({
     selector: 'plan-node',
-    inputs: ['node', 'planStats', 'viewOptions'],
+    inputs: ['plan', 'node', 'viewOptions'],
     templateUrl: './components/plan-node/plan-node.html',
     directives: [PlanNode],
-    providers: [PlanService]
+    providers: [PlanService, SyntaxHighlightService]
 })
 
 export class PlanNode {
@@ -21,8 +23,8 @@ export class PlanNode {
     ESTIMATE_TAG: string = 'bad estimate';
 
     // inputs
+    plan: IPlan;
     node: any;
-    planStats: any;
     viewOptions: any;
 
     // calculated properties
@@ -42,7 +44,7 @@ export class PlanNode {
     estimateDirections = EstimateDirection;
     highlightTypes = HighlightType;
 
-    constructor(private _planService: PlanService) { }
+    constructor(private _planService: PlanService, private _syntaxHighlightService: SyntaxHighlightService) { }
 
     ngOnInit() {
         this.currentHighlightType = this.viewOptions.highlightType;
@@ -63,19 +65,27 @@ export class PlanNode {
         }
     }
 
+    getFormattedQuery() {
+      var keyItems: Array<string> = [];
+      keyItems.push(this.node['Schema'] + '.' + this.node['Relation Name']);
+      keyItems.push(' ' + this.node['Relation Name'] + ' ');
+      keyItems.push(' ' + this.node['Alias'] + ' ');
+      return this._syntaxHighlightService.highlightKeyItems(this.plan.formattedQuery, keyItems);
+    }
+
     calculateBar() {
         switch (this.currentHighlightType) {
             case HighlightType.DURATION:
                 this.highlightValue = (this.node[this._planService.ACTUAL_DURATION_PROP]);
-                this.width = Math.round((this.highlightValue / this.planStats.maxDuration) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxDuration) * this.MAX_WIDTH);
                 break;
             case HighlightType.ROWS:
                 this.highlightValue = (this.node[this._planService.ACTUAL_ROWS_PROP]);
-                this.width = Math.round((this.highlightValue / this.planStats.maxRows) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxRows) * this.MAX_WIDTH);
                 break;
             case HighlightType.COST:
                 this.highlightValue = (this.node[this._planService.ACTUAL_COST_PROP]);
-                this.width = Math.round((this.highlightValue / this.planStats.maxCost) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxCost) * this.MAX_WIDTH);
                 break;
         }
 
@@ -96,7 +106,7 @@ export class PlanNode {
             this.duration = _.round(dur / 1000, 2).toString();
             this.durationUnit = 'mins';
         }
-        this.executionTimePercent = (_.round((dur / this.planStats.executionTime) * 100));
+        this.executionTimePercent = (_.round((dur / this.plan.planStats.executionTime) * 100));
     }
 
     // create an array of node propeties so that they can be displayed in the view

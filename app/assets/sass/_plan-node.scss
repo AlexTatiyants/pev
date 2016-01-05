@@ -7,13 +7,14 @@
    padding: $padding-base $padding-lg;
 	background-color: #fff;
 	font-size: $font-size-sm;
-	border: 2px solid $line-color;
+	border: 1px solid $line-color;
+   margin-bottom: 4px;
 	border-radius: $border-radius-base;
-   overflow: hidden;
    overflow-wrap: break-word;
    word-wrap: break-word;
    word-break: break-all;
    min-width: 220px;
+   box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.1);
 
    header {
       margin-bottom: $padding-base;

@@ -1,12 +1,18 @@
 <div class="plan-node">
    <header (click)="showDetails = !showDetails">
-      <h4>{{node['Node Type'] | uppercase}}</h4>
+      <h4>{{node['Node Type'] | uppercase}}
+      </h4>
       <span class="node-duration">{{duration}}<span class="text-muted">{{durationUnit}} | </span>
       <strong>{{executionTimePercent}}</strong><span class="text-muted">%</span>
       </span>
    </header>
 
-   <div class="relation-name" *ngIf="node['Relation Name']"><span class="text-muted">on </span>
+   <div class="relation-name" *ngIf="node['Relation Name']">
+      <button *ngIf="plan.formattedQuery" class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
+         <i class="fa fa-database"></i>
+      </button>
+
+      <span class="text-muted">on </span>
       <span *ngIf="node['Schema']">{{node['Schema']}}.</span>{{node['Relation Name']}}
       <span *ngIf="node['Alias']"> ({{node['Alias']}})</span>
    </div>
@@ -41,10 +47,18 @@
          <td>{{prop.value}}</td>
       <tr>
    </table>
+
+   <div *ngIf="showQuery" class="plan-query-container">
+      <button class="btn btn-close pull-right" (click)="showQuery = false">
+         <i class="fa fa-close"></i>
+      </button>
+      <h3>query</h3>
+      <pre class="plan-query-text"><code [innerHTML]="getFormattedQuery()"></code></pre>
+   </div>
 </div>
 
 <ul *ngIf="node.Plans">
   <li *ngFor="#subNode of node.Plans">
-    <plan-node [node]="subNode" [viewOptions]="viewOptions" [planStats]="planStats"></plan-node>
+    <plan-node [plan]="plan" [node]="subNode" [viewOptions]="viewOptions" [planStats]="planStats"></plan-node>
   </li>
 </ul>

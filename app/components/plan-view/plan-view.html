@@ -39,20 +39,20 @@
          <span class="stat-value">{{executionTime}}</span>
          <span class="stat-label">execution time ({{executionTimeUnit}})</span>
       </div>
-      <div *ngIf="planStats.planningTime">
-         <span class="stat-value">{{planStats.planningTime | number:'.0-2'}}</span>
+      <div *ngIf="plan.planStats.planningTime">
+         <span class="stat-value">{{plan.planStats.planningTime | number:'.0-2'}}</span>
          <span class="stat-label">planning time (ms)</span>
       </div>
-      <div *ngIf="planStats.maxDuration">
-         <span class="stat-value">{{planStats.maxDuration | number:'.0-2'}}</span>
+      <div *ngIf="plan.planStats.maxDuration">
+         <span class="stat-value">{{plan.planStats.maxDuration | number:'.0-2'}}</span>
          <span class="stat-label">slowest node (ms)</span>
       </div>
-      <div *ngIf="planStats.maxRows">
-         <span class="stat-value">{{planStats.maxRows | number:'.0-2'}}</span>
+      <div *ngIf="plan.planStats.maxRows">
+         <span class="stat-value">{{plan.planStats.maxRows | number:'.0-2'}}</span>
          <span class="stat-label">largest node (rows)</span>
       </div>
-      <div *ngIf="planStats.maxCost">
-         <span class="stat-value">{{planStats.maxCost | number:'.0-2'}}</span>
+      <div *ngIf="plan.planStats.maxCost">
+         <span class="stat-value">{{plan.planStats.maxCost | number:'.0-2'}}</span>
          <span class="stat-label">costliest node</span>
       </div>
    </div>
@@ -60,7 +60,7 @@
    <div class="plan">
       <ul>
          <li>
-            <plan-node [node]="rootContainer.Plan" [planStats]="planStats" [viewOptions]="viewOptions"></plan-node>
+            <plan-node [plan]="plan" [node]="rootContainer.Plan" [viewOptions]="viewOptions"></plan-node>
          </li>
       </ul>
    </div>
