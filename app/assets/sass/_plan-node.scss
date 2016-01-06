@@ -2,7 +2,7 @@
    text-decoration: none;
    color: $text-color;
    display: inline-block;
-   transition: all 0.5s;
+   transition: all 0.1s;
    position: relative;
    padding: $padding-base $padding-lg;
 	background-color: #fff;
@@ -13,7 +13,7 @@
    overflow-wrap: break-word;
    word-wrap: break-word;
    word-break: break-all;
-   min-width: 220px;
+   width: 220px;
    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.1);
 
    header {
@@ -53,9 +53,9 @@
    }
 
    .planner-estimate {
-     float: left;
-   	clear: both;
+      border-top: 1px solid $line-color;
    	text-align: left;
+      padding-top: $padding-sm;
    	margin-top: $padding-base;
    	width: 100%;
    }
@@ -95,14 +95,15 @@
          padding: 0 $padding-base;
       }
    }
+
+   .btn-default {
+      border: 0;
+   }
 }
 
 .node-bar-container {
-   float: left;
    height: 5px;
-   margin-top: $padding-base;
-   margin-left: auto;
-   margin-right: auto;
+   margin-top: $padding-lg;
    border: 1px solid $line-color;
    border-radius: $border-radius-base;
    color: #fff;

@@ -52,8 +52,36 @@ a {
    cursor: pointer;
 }
 
-
 code {
    font-family: $font-family-mono;
    font-weight: 600;
+}
+
+.pad-left {
+   margin-left: $padding-lg;
+}
+
+.pad-top {
+   margin-top: $padding-lg;
+}
+
+[tooltip]:before {
+    width: 150px;
+    text-transform: none;
+    text-align: left;
+    content: attr(tooltip);
+    position: absolute;
+    opacity: 0;
+    transition: all 0.15s ease;
+    padding: $padding-lg;
+    color: #fff;
+    border-radius: $border-radius-lg;
+    margin-top: -10px;
+    margin-left: 20px;
+    z-index: 5;
+}
+
+[tooltip]:hover:before {
+    opacity: 1;
+    background: $dark-blue;
 }

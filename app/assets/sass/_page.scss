@@ -4,10 +4,33 @@
   width: $page-width;
   min-height: 600px;
 
+   em {
+      font-style: italic;
+   }
+}
+
+.page-content {
     h2 {
       font-size: round($font-size-base * 2);
-      margin-bottom: $padding-base;
+      line-height: 2;
     }
+    h3 {
+      font-size: round($font-size-base * 1.7);
+      margin-top: $padding-xl;
+      line-height: 2;
+   }
+
+   p, ul {
+      font-size: round($font-size-base * 1.2);
+      line-height: 1.5;
+      margin-bottom: $padding-xl;
+   }
+
+   ul {
+      list-style-type: disc;
+      position: relative;
+      left: $padding-xl;
+   }
 }
 
 .page-stretch {

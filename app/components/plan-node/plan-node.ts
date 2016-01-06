@@ -66,7 +66,6 @@ export class PlanNode {
     }
 
     ngDoCheck() {
-        //   console.log("check", this.currentHighlightType, this.viewOptions.highlightType);
         if (this.currentHighlightType !== this.viewOptions.highlightType) {
             this.currentHighlightType = this.viewOptions.highlightType;
             this.calculateBar();
@@ -78,6 +77,7 @@ export class PlanNode {
       keyItems.push(this.node[this._planService.SCHEMA_PROP] + '.' + this.node[this._planService.RELATION_NAME_PROP]);
       keyItems.push(' ' + this.node[this._planService.RELATION_NAME_PROP] + ' ');
       keyItems.push(' ' + this.node[this._planService.ALIAS_PROP] + ' ');
+      keyItems.push(this.node[this._planService.GROUP_KEY_PROP]);
       return this._syntaxHighlightService.highlightKeyItems(this.plan.formattedQuery, keyItems);
     }
 

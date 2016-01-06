@@ -2,7 +2,7 @@
    <span class="text-muted">For best results, use EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)</span>
   <div>
     <input placeholder="name (optional)" class="input-box input-box-main" type="text" [(ngModel)]="newPlanName">
-    <button class="btn btn-primary btn-lg pull-right" (click)="submitPlan()">submit</button>
+    <button class="btn btn-default btn-lg pad-top pull-right" (click)="submitPlan()">submit</button>
   </div>
 
   <textarea placeholder="paste execution plan" class="input-box input-box-lg" [(ngModel)]="newPlanContent"></textarea>

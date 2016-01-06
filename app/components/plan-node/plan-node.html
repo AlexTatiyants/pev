@@ -1,5 +1,5 @@
 <div class="plan-node" [class.expanded]="showDetails">
-   <header (click)="showDetails = !showDetails">
+   <header (click)="showDetails = !showDetails" tooltip="view node details">
       <h4>{{node[_planService.NODE_TYPE_PROP] | uppercase}}
       </h4>
       <span class="node-duration">{{duration}}<span class="text-muted">{{durationUnit}} | </span>
@@ -7,11 +7,12 @@
       </span>
    </header>
 
-   <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
-      <button *ngIf="plan.formattedQuery" class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
-         <i class="fa fa-database"></i>
-      </button>
+   <button *ngIf="plan.formattedQuery" tooltip="view corresponding query"
+      class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
+      <i class="fa fa-database"></i>
+   </button>
 
+   <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
       <span class="text-muted">on </span>
       <span *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
       <span *ngIf="node[_planService.ALIAS_PROP]"> ({{node[_planService.ALIAS_PROP]}})</span>
@@ -31,7 +32,7 @@
    </div>
 
    <div *ngIf="currentHighlightType !== highlightTypes.NONE">
-      <div class="node-bar-container" [style.width]="(MAX_WIDTH+3)+'px'">
+      <div class="node-bar-container" [style.width]="(MAX_WIDTH)+'px'">
          <span class="node-bar" [style.width]="width+'px'" [style.backgroundColor]="backgroundColor"></span>
       </div>
       <span class="node-bar-label">

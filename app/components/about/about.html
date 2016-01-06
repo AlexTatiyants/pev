@@ -1,0 +1,41 @@
+<div class="page page-content">
+   <h2>Postgres EXPLAIN Visualizer (Pev)</h2>
+   <p>
+      Pev is designed to make <a href="http://www.postgresql.org/docs/current/static/sql-explain.html">
+      Postgres query plans</a> easier to grok. It displays a plan as a tree, with each node representing a step that takes in a row set
+      and produces another. Pev can show you a number of useful things:</p>
+      <ul>
+         <li>overall plan stats</li>
+         <li>individual node stats (duration, row size, cost)</li>
+         <li>explanation of what each node does</li>
+         <li>outlier nodes</li>
+         <li>graph of a specific metric (like cost) for all nodes</li>
+         <li>for some nodes, highlighted part of the query which corresponds to the node</li>
+      </ul>
+
+   <p>You can tweak display options using the menu on the right.</p>
+
+   <h3>Usage tips</h3>
+   <p>Pev currently accepts only JSON formatted plans. In fact, the get the most out of it,
+      I recommend generating a query plan using the following line:
+      <code>EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)</code>. I also recommend submitting a (decently formatted)
+      SQL query that generated the plan. Doing so will make Pev more useful.
+   </p>
+
+   <p>Pev will remember the plans you analyzed. They are stored locally and are not submitted to me. This is good
+   because no one but you will see your queries. It's also bad because you can't share them with others.</p>
+
+   <h3>Acknowledgements</h3>
+   <p>Pev was inspired and heavily influenced by the excellent <a href="http://explain.depesz.com/">explain.depesz.com</a>. Both the
+      tool and the corresponding help files are a great resource to learn about Postgres and its planner.
+   </p>
+
+   <h3>Help me improve Pev</h3>
+   <p>If you want to help, there are multiple ways to contribute:</p>
+   <ul>
+      <li>give me your plans - I need more test cases for the layout</li>
+      <li>add descriptions for missing node types (especially ones from newer versions of Postgres)</li>
+      <li>contribute to the code on <a href="https://github.com/AlexTatiyants/pev">github</a></li>
+   </ul>
+
+</div>

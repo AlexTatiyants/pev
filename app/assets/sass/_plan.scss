@@ -119,4 +119,15 @@ $connector-line: 2px solid darken($line-color, 10%);
       border-left: solid $triangle-size transparent;
       border-right: solid $triangle-size transparent;
    }
+
+   .btn-close {
+      padding: $padding-base;
+      background-color: transparent;
+      font-size: $font-size-lg;
+      text-align: center;
+      @extend .text-muted;
+      margin-left: $padding-base;
+      cursor: pointer;
+      border: 0;
+   }
 }

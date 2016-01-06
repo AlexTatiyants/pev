@@ -7,4 +7,10 @@ nav {
     width: $page-width;
     margin: auto;
   }
+
+  .about {
+     float: right;
+     line-height: 2;
+     margin-left: $padding-xl;
+ }
 }

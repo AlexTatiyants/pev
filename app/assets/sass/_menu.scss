@@ -9,12 +9,11 @@ $menu-toggle-height: 45px;
    top: $menu-offset - 5;
    left: 0;
    background-color: $gray-dark;
-   box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+   box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.2);
    color: #fff;
    border-top-right-radius: $border-radius-base;
    border-bottom-right-radius: $border-radius-base;
    z-index: 1;
-   // transition: all 0.3s;
 
    header {
       h3 {
