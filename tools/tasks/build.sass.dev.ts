@@ -12,10 +12,9 @@ export = function buildSassDev(gulp, plugins, option) {
                 }
             }))
             .pipe(plugins.compass({
-                // config_file: './config.rb',
                 style: 'compressed',
                 css: 'app/assets/css',
-                sass: join(APP_SRC, 'assets/sass'),
+                sass: join(APP_SRC, 'assets/sass')
             }))
             .pipe(gulp.dest(join(APP_SRC, 'assets')));
     };

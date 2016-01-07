@@ -1,5 +1,5 @@
 import {IPlan} from '../interfaces/iplan';
-import {HighlightType, EstimateDirection} from '../enums';
+import {EstimateDirection} from '../enums';
 /// <reference path="moment.d.ts" />
 /// <reference path="lodash.d.ts" />
 
@@ -22,11 +22,11 @@ export class PlanService {
     HASH_CONDITION_PROP: string = 'Hash Cond';
 
     // computed by pev
-    COMPUTED_TAGS_PROP: string = "*Tags";
+    COMPUTED_TAGS_PROP: string = '*Tags';
 
-    COSTLIEST_NODE_PROP: string = "*Costiest Node (by cost)";
-    LARGEST_NODE_PROP: string = "*Largest Node (by rows)";
-    SLOWEST_NODE_PROP: string = "*Slowest Node (by duration)";
+    COSTLIEST_NODE_PROP: string = '*Costiest Node (by cost)';
+    LARGEST_NODE_PROP: string = '*Largest Node (by rows)';
+    SLOWEST_NODE_PROP: string = '*Slowest Node (by duration)';
 
     MAXIMUM_COSTS_PROP: string = '*Most Expensive Node (cost)';
     MAXIMUM_ROWS_PROP: string = '*Largest Node (rows)';
@@ -38,6 +38,8 @@ export class PlanService {
 
     ARRAY_INDEX_KEY: string = 'arrayIndex';
 
+    PEV_PLAN_TAG: string = 'plan_';
+
     private _maxRows: number = 0;
     private _maxCost: number = 0;
     private _maxDuration: number = 0;
@@ -46,7 +48,9 @@ export class PlanService {
         var plans: Array<IPlan> = [];
 
         for (var i in localStorage) {
-            plans.push(JSON.parse(localStorage[i]));
+            if (_.startsWith(i, this.PEV_PLAN_TAG)) {
+               plans.push(JSON.parse(localStorage[i]));
+            }
         }
 
         return plans;
@@ -58,7 +62,7 @@ export class PlanService {
 
     createPlan(planName: string, planContent: string, planQuery): IPlan {
         var plan: IPlan = {
-            id: 'plan_' + new Date().getTime().toString(),
+            id: this.PEV_PLAN_TAG + new Date().getTime().toString(),
             name: planName || 'plan created on ' + moment().format('LLL'),
             createdOn: new Date(),
             content: JSON.parse(planContent)[0],
@@ -99,7 +103,7 @@ export class PlanService {
             if (key === this.PLANS_PROP) {
                 _.each(value, (value) => {
                     this.processNode(value);
-                })
+                });
             }
         });
     }
@@ -136,7 +140,7 @@ export class PlanService {
             if (key === this.PLANS_PROP) {
                 _.each(value, (value) => {
                     this.findOutlierNodes(value);
-                })
+                });
             }
         });
     }

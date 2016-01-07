@@ -55,7 +55,7 @@ export class PlanView {
             maxRows: this.rootContainer[this._planService.MAXIMUM_ROWS_PROP] || 0,
             maxCost: this.rootContainer[this._planService.MAXIMUM_COSTS_PROP] || 0,
             maxDuration: this.rootContainer[this._planService.MAXIMUM_DURATION_PROP] || 0
-        }
+        };
     }
 
     ngOnInit() {
@@ -75,7 +75,7 @@ export class PlanView {
         var unit: string = '';
 
         if (originalValue < 1) {
-            duration = "<1";
+            duration = '<1';
             unit = 'ms';
         } else if (originalValue > 1 && originalValue < 1000) {
             duration = originalValue.toString();

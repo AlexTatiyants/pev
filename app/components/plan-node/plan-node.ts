@@ -53,8 +53,7 @@ export class PlanNode {
     constructor(private _planService: PlanService,
         private _syntaxHighlightService: SyntaxHighlightService,
         private _helpService: HelpService,
-        private _colorService: ColorService)
-    { }
+        private _colorService: ColorService) { }
 
     ngOnInit() {
         this.currentHighlightType = this.viewOptions.highlightType;
@@ -126,7 +125,10 @@ export class PlanNode {
                 break;
         }
 
-        if (this.width < 1) { this.width = 1 }
+        if (this.width < 1) {
+           this.width = 1;
+        }
+
         this.backgroundColor = this._colorService.numberToColorHsl(1 - this.width / nodeWidth);
     }
 
@@ -134,7 +136,7 @@ export class PlanNode {
         var dur: number = _.round(this.node[this._planService.ACTUAL_DURATION_PROP]);
         // convert duration into approriate units
         if (dur < 1) {
-            this.duration = "<1";
+            this.duration = '<1';
             this.durationUnit = 'ms';
         } else if (dur > 1 && dur < 1000) {
             this.duration = dur.toString();

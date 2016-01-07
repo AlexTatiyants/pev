@@ -13,7 +13,6 @@ export = function buildIndexDev(gulp, plugins) {
       .pipe(gulp.dest(APP_DEST));
   };
 
-
   function inject(name?: string) {
     return plugins.inject(gulp.src(getInjectablesDependenciesRef(name), { read: false }), {
       name,

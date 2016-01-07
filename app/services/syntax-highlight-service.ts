@@ -7,9 +7,8 @@ export class SyntaxHighlightService {
 
     highlight(code: string, keyItems: Array<string>) {
         hljs.registerLanguage('sql', LANG_SQL);
-
         hljs.configure({
-            tabReplace: '    ', // 4 spaces
+            tabReplace: '    '
         });
 
         // prior to syntax highlighting, we want to tag key items in the raw code. making the
@@ -17,12 +16,12 @@ export class SyntaxHighlightService {
         // makes it simpler to find the items we're looing for
         var result: string = code.toUpperCase().replace(', ', ',');
         _.each(keyItems, (keyItem: string) => {
-            result = result.replace(keyItem.toUpperCase(), `${this.OPEN_TAG}${keyItem}${this.CLOSE_TAG}`)
+            result = result.replace(keyItem.toUpperCase(), `${this.OPEN_TAG}${keyItem}${this.CLOSE_TAG}`);
         });
 
         result = hljs.highlightAuto(result).value;
-        result = result.replace(new RegExp(this.OPEN_TAG, 'g'), "<span class='code-key-item'>")
-        result = result.replace(new RegExp(this.CLOSE_TAG, 'g'), "</span>");
+        result = result.replace(new RegExp(this.OPEN_TAG, 'g'), `<span class='code-key-item'>`);
+        result = result.replace(new RegExp(this.CLOSE_TAG, 'g'), '</span>');
 
         return result;
     }
@@ -185,4 +184,4 @@ export var LANG_SQL = function(hljs) {
             COMMENT_MODE
         ]
     };
-}
+};
