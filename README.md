@@ -1,10 +1,11 @@
 # Postgres Explain Visualizer (pev)
 
-Postgres Explain Visualizer (dev) is designed to make [EXPLAIN](http://www.postgresql.org/docs/current/static/sql-explain.html) output easier to grok. It creates a graphical representation of the plan.
+Postgres Explain Visualizer (dev) is designed to make [EXPLAIN](http://www.postgresql.org/docs/current/static/sql-explain.html) output easier to grok. It creates a graphical representation of the plan. You can see it in action at [tatiyants.com/pev](http://tatiyants.com/pev/#/plans).
 
 Pev is heavily influenced by the excellent [explain.depesz.com](http://explain.depesz.com/).
 
-Pev is written in [angular 2](https://angular.io/) with TypeScript. It's based on [angular2 seed](https://github.com/mgechev/angular2-seed) and requires [npm](https://www.npmjs.com/), [gulp](), [tsd](http://definitelytyped.org/tsd/), and [compass](http://compass-style.org/).
+Pev is written in [angular 2](https://angular.io/) with [TypeScript](http://www.typescriptlang.org/). The project is based on [angular2 seed](https://github.com/mgechev/angular2-seed). It requires [npm](https://www.npmjs.com/), [gulp](http://gulpjs.com/), [tsd](http://definitelytyped.org/tsd/), and [compass](http://compass-style.org/).
+
 
 ## Installation
 

@@ -79,6 +79,7 @@ code {
     margin-top: -10px;
     margin-left: 20px;
     z-index: 5;
+    pointer-events: none;
 }
 
 [tooltip]:hover:before {
