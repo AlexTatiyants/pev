@@ -105,13 +105,13 @@
 .node-bar-container {
    height: 5px;
    margin-top: $padding-lg;
-   border: 1px solid $line-color;
-   border-radius: $border-radius-base;
-   color: #fff;
-   background-color: $gray-darkest;
+   margin-bottom: $padding-sm;
+   border-radius: $border-radius-lg;
+   background-color: $gray-light;
    position: relative;
 
    .node-bar {
+      border-radius: $border-radius-lg;
       height: 100%;
       text-align: left;
       position: absolute;

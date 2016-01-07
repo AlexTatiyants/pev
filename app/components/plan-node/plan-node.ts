@@ -19,8 +19,10 @@ import {ColorService} from '../../services/color-service';
 
 export class PlanNode {
     // consts
-    FULL_WIDTH: number = 220;
+    NORMAL_WIDTH: number = 220;
     COMPACT_WIDTH: number = 140;
+    EXPANDED_WIDTH: number = 400;
+
     MIN_ESTIMATE_MISS: number = 100;
     COSTLY_TAG: string = 'costliest';
     SLOW_TAG: string = 'slowest';
@@ -32,19 +34,26 @@ export class PlanNode {
     node: any;
     viewOptions: any;
 
+    // UI flags
+    showDetails: boolean;
+
     // calculated properties
     duration: string;
     durationUnit: string;
     executionTimePercent: number;
     backgroundColor: string;
     highlightValue: number;
-    width: number;
+    barContainerWidth: number;
+    barWidth: number;
     props: Array<any>;
     tags: Array<string>;
     plannerRowEstimateValue: number;
     plannerRowEstimateDirection: EstimateDirection;
-    currentHighlightType: string; // keep track of highlight type for change detection
+
+     // required for custom change detection
+    currentHighlightType: string;
     currentCompactView: boolean;
+    currentExpandedView: boolean;
 
     // expose enum to view
     estimateDirections = EstimateDirection;
@@ -75,6 +84,11 @@ export class PlanNode {
         if (this.currentCompactView !== this.viewOptions.showCompactView) {
             this.currentCompactView = this.viewOptions.showCompactView;
             this.calculateBar();
+        }
+
+        if (this.currentExpandedView !== this.showDetails) {
+           this.currentExpandedView = this.showDetails;
+           this.calculateBar();
         }
     }
 
@@ -108,28 +122,33 @@ export class PlanNode {
     }
 
     calculateBar() {
-        var nodeWidth = this.viewOptions.showCompactView ? this.COMPACT_WIDTH : this.FULL_WIDTH;
+        this.barContainerWidth = this.viewOptions.showCompactView ? this.COMPACT_WIDTH : this.NORMAL_WIDTH;
+
+        // expanded view width trumps others
+        if (this.currentExpandedView) {
+           this.barContainerWidth = this.EXPANDED_WIDTH;
+        }
 
         switch (this.currentHighlightType) {
             case HighlightType.DURATION:
                 this.highlightValue = (this.node[this._planService.ACTUAL_DURATION_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxDuration) * nodeWidth);
+                this.barWidth = Math.round((this.highlightValue / this.plan.planStats.maxDuration) * this.barContainerWidth);
                 break;
             case HighlightType.ROWS:
                 this.highlightValue = (this.node[this._planService.ACTUAL_ROWS_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxRows) * nodeWidth);
+                this.barWidth = Math.round((this.highlightValue / this.plan.planStats.maxRows) * this.barContainerWidth);
                 break;
             case HighlightType.COST:
                 this.highlightValue = (this.node[this._planService.ACTUAL_COST_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxCost) * nodeWidth);
+                this.barWidth = Math.round((this.highlightValue / this.plan.planStats.maxCost) * this.barContainerWidth);
                 break;
         }
 
-        if (this.width < 1) {
-           this.width = 1;
+        if (this.barWidth < 1) {
+           this.barWidth = 1;
         }
 
-        this.backgroundColor = this._colorService.numberToColorHsl(1 - this.width / nodeWidth);
+        this.backgroundColor = this._colorService.numberToColorHsl(1 - this.barWidth / this.barContainerWidth);
     }
 
     calculateDuration() {

@@ -38,8 +38,8 @@
    </div>
 
    <div *ngIf="currentHighlightType !== highlightTypes.NONE">
-      <div class="node-bar-container" [style.width]="(MAX_WIDTH)+'px'">
-         <span class="node-bar" [style.width]="width+'px'" [style.backgroundColor]="backgroundColor"></span>
+      <div class="node-bar-container">
+         <span class="node-bar" [style.width]="barWidth+'px'" [style.backgroundColor]="backgroundColor"></span>
       </div>
       <span class="node-bar-label">
          <span class="text-muted">{{viewOptions.highlightType}}:</span> {{highlightValue | number:'.0-2'}}

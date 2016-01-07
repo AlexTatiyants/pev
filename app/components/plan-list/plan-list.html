@@ -5,7 +5,7 @@
 
   <table class="table">
     <tr *ngFor="#plan of plans">
-      <td><a [routerLink]="['/PlanView', {id: plan.id}]">{{plan.name}}</a></td>
+      <td width="30%"><a [routerLink]="['/PlanView', {id: plan.id}]">{{plan.name}}</a></td>
       <td>created on {{plan.createdOn | momentDate }}</td>
       <td class="align-right"><button class="btn btn-danger" (click)="requestDelete()">
         <i class="fa fa-trash"></i>delete</button>
