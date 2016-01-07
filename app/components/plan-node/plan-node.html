@@ -10,7 +10,7 @@
       </span>
    </header>
 
-   <button *ngIf="plan.formattedQuery && !viewOptions.showCompactView" tooltip="view corresponding query"
+   <button *ngIf="plan.query && !viewOptions.showCompactView" tooltip="view corresponding query"
       class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
       <i class="fa fa-database"></i>
    </button>

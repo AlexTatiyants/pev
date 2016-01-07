@@ -2,20 +2,29 @@
 /// <reference path="lodash.d.ts" />
 
 export class SyntaxHighlightService {
-    init() {
-        hljs.registerLanguage('sql', LANG_SQL);
-    }
+    OPEN_TAG: string = ' _OPEN_TAG_';
+    CLOSE_TAG: string = '_CLOSE_TAG_';
 
-    highlight(code) {
+    highlight(code: string, keyItems: Array<string>) {
+        hljs.registerLanguage('sql', LANG_SQL);
+
         hljs.configure({
             tabReplace: '    ', // 4 spaces
         });
-        return hljs.highlightAuto(code).value;
-    }
 
-    highlightKeyItems(value: string, keyItems: Array<string>) {
-        _.each(keyItems, (keyItem) => { value = value.replace(keyItem, `<span class='code-key-item'>${keyItem}</span>`) })
-        return value;
+        // prior to syntax highlighting, we want to tag key items in the raw code. making the
+        // query upper case and ensuring that all comma separated values have a space
+        // makes it simpler to find the items we're looing for
+        var result: string = code.toUpperCase().replace(', ', ',');
+        _.each(keyItems, (keyItem: string) => {
+            result = result.replace(keyItem.toUpperCase(), `${this.OPEN_TAG}${keyItem}${this.CLOSE_TAG}`)
+        });
+
+        result = hljs.highlightAuto(result).value;
+        result = result.replace(new RegExp(this.OPEN_TAG, 'g'), "<span class='code-key-item'>")
+        result = result.replace(new RegExp(this.CLOSE_TAG, 'g'), "</span>");
+
+        return result;
     }
 }
 
@@ -43,7 +52,7 @@ export var LANG_SQL = function(hljs) {
                     'authors auto autoallocate autodblink autoextend automatic availability avg backup badfile basicfile ' +
                     'before begin beginning benchmark between bfile bfile_base big bigfile bin binary_double binary_float ' +
                     'binlog bit_and bit_count bit_length bit_or bit_xor bitmap blob_base block blocksize body both bound ' +
-                    'buffer_cache buffer_pool build bulk by byte byteordermark bytes c cache caching call calling cancel ' +
+                    'buffer_cache buffer_pool build bulk by byte byteordermark bytes cache caching call calling cancel ' +
                     'capacity cascade cascaded case cast catalog category ceil ceiling chain change changed char_base ' +
                     'char_length character_length characters characterset charindex charset charsetform charsetid check ' +
                     'checksum checksum_agg child choose chr chunk class cleanup clear client clob clob_base clone close ' +

@@ -74,27 +74,38 @@ export class PlanNode {
         }
 
         if (this.currentCompactView !== this.viewOptions.showCompactView) {
-           this.currentCompactView = this.viewOptions.showCompactView;
-           this.calculateBar();
+            this.currentCompactView = this.viewOptions.showCompactView;
+            this.calculateBar();
         }
     }
 
     getFormattedQuery() {
         var keyItems: Array<string> = [];
 
-        var relationName = this.node[this._planService.RELATION_NAME_PROP];
+        // relation name will be highlighted for SCAN nodes
+        var relationName: string = this.node[this._planService.RELATION_NAME_PROP];
         if (relationName) {
             keyItems.push(this.node[this._planService.SCHEMA_PROP] + '.' + relationName);
             keyItems.push(' ' + relationName);
             keyItems.push(' ' + this.node[this._planService.ALIAS_PROP] + ' ');
         }
 
+        // group key will be highlighted for AGGREGATE nodes
         var groupKey: Array<string> = this.node[this._planService.GROUP_KEY_PROP];
         if (groupKey) {
-            keyItems.push('BY</span> ' + groupKey.join(','));
-            keyItems.push('BY</span> ' + groupKey.join(', '));
+            keyItems.push('GROUP BY ' + groupKey.join(','));
         }
-        return this._syntaxHighlightService.highlightKeyItems(this.plan.formattedQuery, keyItems);
+
+        // hash condition will be highlighted for HASH JOIN nodes
+        var hashCondition: string = this.node[this._planService.HASH_CONDITION_PROP];
+        if (hashCondition) {
+            keyItems.push(hashCondition.replace('(', '').replace(')', ''));
+        }
+
+        if (this.node[this._planService.NODE_TYPE_PROP].toUpperCase() === 'LIMIT') {
+           keyItems.push('LIMIT');
+        }
+        return this._syntaxHighlightService.highlight(this.plan.query, keyItems);
     }
 
     calculateBar() {

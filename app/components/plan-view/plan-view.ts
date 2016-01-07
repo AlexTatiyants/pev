@@ -34,7 +34,7 @@ export class PlanView {
 
     highlightTypes = HighlightType; // exposing the enum to the view
 
-    constructor(private _planService: PlanService, routeParams: RouteParams, private _syntaxHighlightService: SyntaxHighlightService) {
+    constructor(private _planService: PlanService, routeParams: RouteParams) {
         this.id = routeParams.get('id');
     }
 
@@ -56,10 +56,6 @@ export class PlanView {
             maxCost: this.rootContainer[this._planService.MAXIMUM_COSTS_PROP] || 0,
             maxDuration: this.rootContainer[this._planService.MAXIMUM_DURATION_PROP] || 0
         }
-
-        // get syntax highlighted query
-        this._syntaxHighlightService.init();
-        this.plan.formattedQuery = this._syntaxHighlightService.highlight(this.plan.query);
     }
 
     ngOnInit() {

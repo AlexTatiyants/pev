@@ -19,6 +19,7 @@ export class PlanService {
     SORT_KEY_PROP: string = 'Sort Key';
     JOIN_TYPE_PROP: string = 'Join Type';
     INDEX_NAME_PROP: string = 'Index Name';
+    HASH_CONDITION_PROP: string = 'Hash Cond';
 
     // computed by pev
     COMPUTED_TAGS_PROP: string = "*Tags";

@@ -12,11 +12,14 @@ export var NODE_DESCRIPTIONS = {
    "NESTED LOOP": `merges two record sets by looping through every record in the first set and
    trying to find a match in the second set. All matching records are returned.`,
    "MERGE JOIN": `merges two record sets by first sorting them on a <strong>join key</strong>.`,
+   "HASH": `generates a hash table from the records in the input recordset. Hash is used by
+   <strong>Hash Join</strong>.`,
+   "HASH JOIN": `joins to record sets by hashing one of them (using a <strong>Hash Scan</scan>).`,
    "AGGREGATE": `groups records together based on a GROUP BY or aggregate function (like <code>sum()</code>).`,
    "HASHAGGREGATE": `groups records together based on a GROUP BY or aggregate function (like sum()). Hash Aggregate uses
    a hash to first organize the records by a key.`,
-   "SEQ SCAN": `finds relevant records by sequentially scanning the table. Seq Scans perform a single read operation
-   (only the table is read).`,
+   "SEQ SCAN": `finds relevant records by sequentially scanning the input record set. When reading from a table,
+   Seq Scans (unlike Index Scans) perform a single read operation (only the table is read).`,
    "INDEX SCAN": `finds relevant records based on an <strong>Index</strong>. Index Scans perform 2 read operations: one to
    read the index and another to read the actual value from the table.`,
    "INDEX ONLY SCAN": `finds relevant records based on an <strong>Index</strong>. Index Only Scans perform a single read operation
