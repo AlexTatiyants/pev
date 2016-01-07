@@ -82,7 +82,7 @@ $connector-line: 2px solid darken($line-color, 10%);
 .plan-stats {
    display: flex;
    font-size: $font-size-base;
-   margin: 0 auto $padding-lg auto;
+   margin: $padding-lg auto $padding-lg auto;
    padding-bottom: $padding-lg;
    border-bottom: 1px solid $line-color;
    border-radius: $border-radius-lg*2;

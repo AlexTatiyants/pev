@@ -71,6 +71,7 @@
          font-size: round($font-size-sm * 0.8);
          font-weight: 600;
          margin-right: $padding-sm;
+         margin-bottom: $padding-sm;
          padding: $padding-sm;
          border-radius: $border-radius-base;
          line-height: 1.1;
@@ -125,5 +126,9 @@
 }
 
 .expanded {
-   width: 400px;
+   width: 400px !important;
+}
+
+.compact {
+   width: 140px;
 }

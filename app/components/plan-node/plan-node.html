@@ -1,32 +1,38 @@
-<div class="plan-node" [class.expanded]="showDetails">
+<div class="plan-node" [class.expanded]="showDetails" [class.compact]="viewOptions.showCompactView">
    <header (click)="showDetails = !showDetails" tooltip="view node details">
       <h4>{{node[_planService.NODE_TYPE_PROP] | uppercase}}
       </h4>
-      <span class="node-duration">{{duration}}<span class="text-muted">{{durationUnit}} | </span>
-      <strong>{{executionTimePercent}}</strong><span class="text-muted">%</span>
+      <span *ngIf="!viewOptions.showCompactView">
+         <span class="node-duration">{{duration}}
+            <span class="text-muted">{{durationUnit}} | </span><strong>{{executionTimePercent}}</strong>
+            <span class="text-muted">%</span>
+         </span>
       </span>
    </header>
 
-   <button *ngIf="plan.formattedQuery" tooltip="view corresponding query"
+   <button *ngIf="plan.formattedQuery && !viewOptions.showCompactView" tooltip="view corresponding query"
       class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
       <i class="fa fa-database"></i>
    </button>
 
-   <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
-      <span class="text-muted">on </span>
-      <span *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
-      <span *ngIf="node[_planService.ALIAS_PROP]"> ({{node[_planService.ALIAS_PROP]}})</span>
+   <div *ngIf="!viewOptions.showCompactView">
+      <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
+         <span class="text-muted">on </span>
+         <span *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
+         <span *ngIf="node[_planService.ALIAS_PROP]"> ({{node[_planService.ALIAS_PROP]}})</span>
+      </div>
+
+      <div class="relation-name" *ngIf="node[_planService.GROUP_KEY_PROP]">
+         <span class="text-muted">by</span> {{node[_planService.GROUP_KEY_PROP]}}</div>
+      <div class="relation-name" *ngIf="node[_planService.SORT_KEY_PROP]">
+         <span class="text-muted">by</span> {{node[_planService.SORT_KEY_PROP]}}</div>
+      <div class="relation-name" *ngIf="node[_planService.JOIN_TYPE_PROP]">{{node[_planService.JOIN_TYPE_PROP]}}
+         <span class="text-muted">join</span></div>
+      <div class="relation-name" *ngIf="node[_planService.INDEX_NAME_PROP]"><span class="text-muted">
+         using</span> {{node[_planService.INDEX_NAME_PROP]}}</div>
+      <div class="relation-name" *ngIf="node[_planService.HASH_CONDITION_PROP]"><span class="text-muted">
+         on</span> {{node[_planService.HASH_CONDITION_PROP]}}</div>
    </div>
-
-   <div class="relation-name" *ngIf="node[_planService.GROUP_KEY_PROP]">
-      <span class="text-muted">by</span> {{node[_planService.GROUP_KEY_PROP]}}</div>
-   <div class="relation-name" *ngIf="node[_planService.SORT_KEY_PROP]">
-      <span class="text-muted">by</span> {{node[_planService.SORT_KEY_PROP]}}</div>
-   <div class="relation-name" *ngIf="node[_planService.JOIN_TYPE_PROP]">{{node[_planService.JOIN_TYPE_PROP]}}
-      <span class="text-muted">join</span></div>
-   <div class="relation-name" *ngIf="node[_planService.INDEX_NAME_PROP]"><span class="text-muted">
-      using</span> {{node[_planService.INDEX_NAME_PROP]}}</div>
-
    <div class="tags" *ngIf="viewOptions.showTags && tags.length > 0">
       <span *ngFor="#tag of tags">{{tag}}</span>
    </div>

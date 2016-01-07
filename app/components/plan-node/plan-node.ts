@@ -19,7 +19,8 @@ import {ColorService} from '../../services/color-service';
 
 export class PlanNode {
     // consts
-    MAX_WIDTH: number = 220;
+    FULL_WIDTH: number = 220;
+    COMPACT_WIDTH: number = 140;
     MIN_ESTIMATE_MISS: number = 100;
     COSTLY_TAG: string = 'costliest';
     SLOW_TAG: string = 'slowest';
@@ -42,17 +43,18 @@ export class PlanNode {
     tags: Array<string>;
     plannerRowEstimateValue: number;
     plannerRowEstimateDirection: EstimateDirection;
-    currentHighlightType: string;
+    currentHighlightType: string; // keep track of highlight type for change detection
+    currentCompactView: boolean;
 
     // expose enum to view
     estimateDirections = EstimateDirection;
     highlightTypes = HighlightType;
 
     constructor(private _planService: PlanService,
-      private _syntaxHighlightService: SyntaxHighlightService,
-      private _helpService: HelpService,
-      private _colorService: ColorService)
-      {}
+        private _syntaxHighlightService: SyntaxHighlightService,
+        private _helpService: HelpService,
+        private _colorService: ColorService)
+    { }
 
     ngOnInit() {
         this.currentHighlightType = this.viewOptions.highlightType;
@@ -70,35 +72,51 @@ export class PlanNode {
             this.currentHighlightType = this.viewOptions.highlightType;
             this.calculateBar();
         }
+
+        if (this.currentCompactView !== this.viewOptions.showCompactView) {
+           this.currentCompactView = this.viewOptions.showCompactView;
+           this.calculateBar();
+        }
     }
 
     getFormattedQuery() {
-      var keyItems: Array<string> = [];
-      keyItems.push(this.node[this._planService.SCHEMA_PROP] + '.' + this.node[this._planService.RELATION_NAME_PROP]);
-      keyItems.push(' ' + this.node[this._planService.RELATION_NAME_PROP] + ' ');
-      keyItems.push(' ' + this.node[this._planService.ALIAS_PROP] + ' ');
-      keyItems.push(this.node[this._planService.GROUP_KEY_PROP]);
-      return this._syntaxHighlightService.highlightKeyItems(this.plan.formattedQuery, keyItems);
+        var keyItems: Array<string> = [];
+
+        var relationName = this.node[this._planService.RELATION_NAME_PROP];
+        if (relationName) {
+            keyItems.push(this.node[this._planService.SCHEMA_PROP] + '.' + relationName);
+            keyItems.push(' ' + relationName);
+            keyItems.push(' ' + this.node[this._planService.ALIAS_PROP] + ' ');
+        }
+
+        var groupKey: Array<string> = this.node[this._planService.GROUP_KEY_PROP];
+        if (groupKey) {
+            keyItems.push('BY</span> ' + groupKey.join(','));
+            keyItems.push('BY</span> ' + groupKey.join(', '));
+        }
+        return this._syntaxHighlightService.highlightKeyItems(this.plan.formattedQuery, keyItems);
     }
 
     calculateBar() {
+        var nodeWidth = this.viewOptions.showCompactView ? this.COMPACT_WIDTH : this.FULL_WIDTH;
+
         switch (this.currentHighlightType) {
             case HighlightType.DURATION:
                 this.highlightValue = (this.node[this._planService.ACTUAL_DURATION_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxDuration) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxDuration) * nodeWidth);
                 break;
             case HighlightType.ROWS:
                 this.highlightValue = (this.node[this._planService.ACTUAL_ROWS_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxRows) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxRows) * nodeWidth);
                 break;
             case HighlightType.COST:
                 this.highlightValue = (this.node[this._planService.ACTUAL_COST_PROP]);
-                this.width = Math.round((this.highlightValue / this.plan.planStats.maxCost) * this.MAX_WIDTH);
+                this.width = Math.round((this.highlightValue / this.plan.planStats.maxCost) * nodeWidth);
                 break;
         }
 
         if (this.width < 1) { this.width = 1 }
-        this.backgroundColor = this._colorService.numberToColorHsl(1 - this.width / this.MAX_WIDTH);
+        this.backgroundColor = this._colorService.numberToColorHsl(1 - this.width / nodeWidth);
     }
 
     calculateDuration() {
@@ -144,6 +162,6 @@ export class PlanNode {
     }
 
     getNodeTypeDescription() {
-      return this._helpService.getNodeTypeDescription(this.node[this._planService.NODE_TYPE_PROP]);
-   }
+        return this._helpService.getNodeTypeDescription(this.node[this._planService.NODE_TYPE_PROP]);
+    }
 }
