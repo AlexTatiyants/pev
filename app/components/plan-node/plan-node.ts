@@ -1,6 +1,7 @@
 import {IPlan} from '../../interfaces/iplan';
 import {Component, OnInit} from 'angular2/core';
 import {HighlightType, EstimateDirection} from '../../enums';
+import {DurationPipe, DurationUnitPipe} from '../../pipes';
 
 import {PlanService} from '../../services/plan-service';
 import {SyntaxHighlightService} from '../../services/syntax-highlight-service';
@@ -14,7 +15,8 @@ import {ColorService} from '../../services/color-service';
     inputs: ['plan', 'node', 'viewOptions'],
     templateUrl: './components/plan-node/plan-node.html',
     directives: [PlanNode],
-    providers: [PlanService, SyntaxHighlightService, HelpService, ColorService]
+    providers: [PlanService, SyntaxHighlightService, HelpService, ColorService],
+    pipes: [DurationPipe, DurationUnitPipe]
 })
 
 export class PlanNode {
@@ -38,8 +40,6 @@ export class PlanNode {
     showDetails: boolean;
 
     // calculated properties
-    duration: string;
-    durationUnit: string;
     executionTimePercent: number;
     backgroundColor: string;
     highlightValue: number;
@@ -50,7 +50,7 @@ export class PlanNode {
     plannerRowEstimateValue: number;
     plannerRowEstimateDirection: EstimateDirection;
 
-     // required for custom change detection
+    // required for custom change detection
     currentHighlightType: string;
     currentCompactView: boolean;
     currentExpandedView: boolean;
@@ -87,8 +87,8 @@ export class PlanNode {
         }
 
         if (this.currentExpandedView !== this.showDetails) {
-           this.currentExpandedView = this.showDetails;
-           this.calculateBar();
+            this.currentExpandedView = this.showDetails;
+            this.calculateBar();
         }
     }
 
@@ -116,7 +116,7 @@ export class PlanNode {
         }
 
         if (this.node[this._planService.NODE_TYPE_PROP].toUpperCase() === 'LIMIT') {
-           keyItems.push('LIMIT');
+            keyItems.push('LIMIT');
         }
         return this._syntaxHighlightService.highlight(this.plan.query, keyItems);
     }
@@ -126,7 +126,7 @@ export class PlanNode {
 
         // expanded view width trumps others
         if (this.currentExpandedView) {
-           this.barContainerWidth = this.EXPANDED_WIDTH;
+            this.barContainerWidth = this.EXPANDED_WIDTH;
         }
 
         switch (this.currentHighlightType) {
@@ -145,26 +145,14 @@ export class PlanNode {
         }
 
         if (this.barWidth < 1) {
-           this.barWidth = 1;
+            this.barWidth = 1;
         }
 
         this.backgroundColor = this._colorService.numberToColorHsl(1 - this.barWidth / this.barContainerWidth);
     }
 
     calculateDuration() {
-        var dur: number = _.round(this.node[this._planService.ACTUAL_DURATION_PROP]);
-        // convert duration into approriate units
-        if (dur < 1) {
-            this.duration = '<1';
-            this.durationUnit = 'ms';
-        } else if (dur > 1 && dur < 1000) {
-            this.duration = dur.toString();
-            this.durationUnit = 'ms';
-        } else {
-            this.duration = _.round(dur / 1000, 2).toString();
-            this.durationUnit = 'mins';
-        }
-        this.executionTimePercent = (_.round((dur / this.plan.planStats.executionTime) * 100));
+        this.executionTimePercent = (_.round((this.node[this._planService.ACTUAL_DURATION_PROP] / this.plan.planStats.executionTime) * 100));
     }
 
     // create an array of node propeties so that they can be displayed in the view

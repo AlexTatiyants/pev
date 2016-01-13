@@ -6,19 +6,19 @@ import {HighlightType} from '../../enums';
 import {PlanNode} from '../plan-node/plan-node';
 import {PlanService} from '../../services/plan-service';
 import {SyntaxHighlightService} from '../../services/syntax-highlight-service';
+import {DurationPipe, DurationUnitPipe} from '../../pipes';
 
 @Component({
     selector: 'plan-view',
     templateUrl: './components/plan-view/plan-view.html',
     directives: [ROUTER_DIRECTIVES, PlanNode],
-    providers: [PlanService, SyntaxHighlightService]
+    providers: [PlanService, SyntaxHighlightService],
+    pipes: [DurationPipe, DurationUnitPipe]
 })
 export class PlanView {
     id: string;
     plan: IPlan;
     rootContainer: any;
-    executionTime: string;
-    executionTimeUnit: string;
     hideMenu: boolean = true;
 
     viewOptions: any = {
@@ -45,12 +45,8 @@ export class PlanView {
 
         this.plan = this._planService.getPlan(this.id);
         this.rootContainer = this.plan.content;
-
-        var executionTime: number = this.rootContainer['Execution Time'] || this.rootContainer['Total Runtime'];
-        [this.executionTime, this.executionTimeUnit] = this.calculateDuration(executionTime);
-
         this.plan.planStats = {
-            executionTime: executionTime,
+            executionTime: this.rootContainer['Execution Time'] || this.rootContainer['Total Runtime'],
             planningTime: this.rootContainer['Planning Time'] || 0,
             maxRows: this.rootContainer[this._planService.MAXIMUM_ROWS_PROP] || 0,
             maxCost: this.rootContainer[this._planService.MAXIMUM_COSTS_PROP] || 0,
@@ -68,22 +64,5 @@ export class PlanView {
 
     analyzePlan() {
         this._planService.analyzePlan(this.plan);
-    }
-
-    calculateDuration(originalValue: number) {
-        var duration: string = '';
-        var unit: string = '';
-
-        if (originalValue < 1) {
-            duration = '<1';
-            unit = 'ms';
-        } else if (originalValue > 1 && originalValue < 1000) {
-            duration = originalValue.toString();
-            unit = 'ms';
-        } else {
-            duration = _.round(originalValue / 1000, 2).toString();
-            unit = 'mins';
-        }
-        return [duration, unit];
     }
 }

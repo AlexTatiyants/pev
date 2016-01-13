@@ -3,8 +3,8 @@
       <h4>{{node[_planService.NODE_TYPE_PROP] | uppercase}}
       </h4>
       <span *ngIf="!viewOptions.showCompactView">
-         <span class="node-duration">{{duration}}
-            <span class="text-muted">{{durationUnit}} | </span><strong>{{executionTimePercent}}</strong>
+         <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}
+            <span class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}} | </span><strong>{{executionTimePercent}}</strong>
             <span class="text-muted">%</span>
          </span>
       </span>

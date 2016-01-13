@@ -41,16 +41,16 @@
    <h2>{{plan.name}}</h2>
    <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
       <div>
-         <span class="stat-value">{{executionTime}}</span>
-         <span class="stat-label">execution time ({{executionTimeUnit}})</span>
+         <span class="stat-value">{{plan.planStats.executionTime | duration}}</span>
+         <span class="stat-label">execution time ({{plan.planStats.executionTime | durationUnit}})</span>
       </div>
       <div *ngIf="plan.planStats.planningTime">
          <span class="stat-value">{{plan.planStats.planningTime | number:'.0-2'}}</span>
          <span class="stat-label">planning time (ms)</span>
       </div>
       <div *ngIf="plan.planStats.maxDuration">
-         <span class="stat-value">{{plan.planStats.maxDuration | number:'.0-2'}}</span>
-         <span class="stat-label">slowest node (ms)</span>
+         <span class="stat-value">{{plan.planStats.maxDuration | duration}}</span>
+         <span class="stat-label">slowest node ({{plan.planStats.maxDuration | durationUnit}})</span>
       </div>
       <div *ngIf="plan.planStats.maxRows">
          <span class="stat-value">{{plan.planStats.maxRows | number:'.0-2'}}</span>
