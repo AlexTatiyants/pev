@@ -3,8 +3,8 @@
       <h4>{{node[_planService.NODE_TYPE_PROP] | uppercase}}
       </h4>
       <span *ngIf="!viewOptions.showCompactView">
-         <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}
-            <span class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}} | </span><strong>{{executionTimePercent}}</strong>
+         <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}<span class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}}
+             | </span><strong>{{executionTimePercent}}</strong>
             <span class="text-muted">%</span>
          </span>
       </span>
@@ -49,7 +49,7 @@
    <div class="planner-estimate" *ngIf="viewOptions.showPlannerEstimate">
       <span *ngIf="plannerRowEstimateDirection === estimateDirections.over"><strong>over</strong> estimated rows</span>
       <span *ngIf="plannerRowEstimateDirection === estimateDirections.under"><strong>under</strong> estimated rows</span>
-      <span> by <strong>{{plannerRowEstimateValue}}</strong>x</span>
+      <span> by <strong>{{plannerRowEstimateValue | number}}</strong>x</span>
    </div>
 
    <div *ngIf="showDetails">
@@ -63,6 +63,7 @@
             <td>{{prop.value}}</td>
          <tr>
       </table>
+      <div class="text-muted pad-top align-right"><em>*Pev calculated value</em></div>
    </div>
 
    <div *ngIf="showQuery" class="plan-query-container">

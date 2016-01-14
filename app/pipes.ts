@@ -36,9 +36,9 @@ export class DurationUnitPipe {
         } else if (value > 1 && value < 1000) {
             unit = 'ms';
         } else if (value >= 1000 && value < 60000) {
-            unit = 'secs';
+            unit = 's';
         } else if (value >= 60000) {
-            unit = 'mins';
+            unit = 'min';
         }
         return unit;
     }

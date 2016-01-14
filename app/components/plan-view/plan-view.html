@@ -27,18 +27,31 @@
 
       <li>
          <label>graph metric: </label>
-         <select [(ngModel)]="viewOptions.highlightType">
+         <div class="button-group">
+            <button [class.selected]="viewOptions.highlightType === highlightTypes.NONE" (click)="viewOptions.highlightType = highlightTypes.NONE">none</button>
+            <button [class.selected]="viewOptions.highlightType === highlightTypes.DURATION" (click)="viewOptions.highlightType = highlightTypes.DURATION">duration</button>
+            <button [class.selected]="viewOptions.highlightType === highlightTypes.ROWS" (click)="viewOptions.highlightType = highlightTypes.ROWS">rows</button>
+            <button [class.selected]="viewOptions.highlightType === highlightTypes.COST" (click)="viewOptions.highlightType = highlightTypes.COST">cost</button>
+         </div>
+         <!-- <select [(ngModel)]="viewOptions.highlightType">
             <option value="{{highlightTypes.NONE}}">{{highlightTypes.NONE}}</option>
             <option value="{{highlightTypes.DURATION}}">{{highlightTypes.DURATION}}</option>
             <option value="{{highlightTypes.ROWS}}">{{highlightTypes.ROWS}}</option>
             <option value="{{highlightTypes.COST}}">{{highlightTypes.COST}}</option>
-         </select>
+         </select> -->
       </li>
    </ul>
 </div>
 
 <div class="page page-stretch">
-   <h2>{{plan.name}}</h2>
+   <h2><span *ngIf="!editName">{{plan.name}}</span>
+      <input *ngIf="editName" class="input-box input-box-main" type="text" [(ngModel)]="plan.name">
+      <button class="btn btn-link btn-lg" (click) = "editName = !editName">
+         <i class="fa fa-pencil"></i>
+      </button>
+   </h2>
+
+
    <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
       <div>
          <span class="stat-value">{{plan.planStats.executionTime | duration}}</span>

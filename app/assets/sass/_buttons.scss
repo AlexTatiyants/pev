@@ -1,68 +1,97 @@
 .btn {
-  border-radius: $border-radius-base;
-  padding: $padding-base $padding-lg;
-  font-size: $font-size-base;
-  line-height: 1.2;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-left: $padding-base;
+   border-radius: $border-radius-base;
+   padding: $padding-base $padding-lg;
+   font-size: $font-size-base;
+   line-height: 1.2;
+   text-decoration: none;
+   text-transform: uppercase;
+   cursor: pointer;
+   margin-left: $padding-base;
 
-  &-default {
-    border: 1px solid $blue;
-    color: $blue;
-    background-color: #fff;
+   &-default {
+   border: 1px solid $blue;
+   color: $blue;
+   background-color: #fff;
 
-    &:hover {
-      background-color: $light-blue;
-      color: #fff;
-    }
-  }
+      &:hover {
+         background-color: $light-blue;
+         color: #fff;
+      }
+   }
 
-  &-lg {
-    padding: $padding-base $padding-lg*2;
-    font-size: round($font-size-base * 1.2);
-  }
+   &-lg {
+      padding: $padding-base $padding-lg*2;
+      font-size: round($font-size-base * 1.2);
+   }
 
-  &-sm {
-     padding: $padding-base $padding-base;
-    font-size: round($font-size-base * 0.9);
- }
+   &-sm {
+      padding: $padding-base $padding-base;
+      font-size: round($font-size-base * 0.9);
+   }
 
- &-slim {
-    .fa { margin: 0};
-}
+   &-slim {
+      .fa { margin: 0};
+   }
 
-  &-danger {
-    border: 1px solid $red;
-    color: $red;
-    text-transform: uppercase;
-    background-color: #fff;
+   &-link {
+      border: 0;
+      background-color: transparent;
+      color: $link-color;
+      padding: 0;
+   }
 
-    &:hover {
-      background-color: $light-red;
-    }
-  }
+   &-danger {
+      border: 1px solid $red;
+      color: $red;
+      text-transform: uppercase;
+      background-color: #fff;
 
-  &-primary {
-    border: 0;
-    background: $blue;
-   //  background-image: linear-gradient(to bottom, $blue, $dark-blue);
-    box-shadow: 1px 1px 1px $gray;
-    color: #ffffff;
+      &:hover {
+         background-color: $light-red;
+      }
+   }
 
-    &:hover {
-      background: $dark-blue;
-      // background-image: linear-gradient(to bottom, $dark-blue, $blue);
-    }
-  }
+   &-primary {
+      border: 0;
+      background: $blue;
+      box-shadow: 1px 1px 1px $gray;
+      color: #ffffff;
 
-  &-close {
-     @extend .btn-slim;
-     border-radius: 50%;
-     box-shadow: 0;
-     line-height: 1.5;
-     border: 1px solid $line-color;
-     background-color: #fff;
- }
+      &:hover {
+         background: $dark-blue;
+      }
+   }
+
+   &-close {
+      @extend .btn-slim;
+         border-radius: 50%;
+         box-shadow: 0;
+         line-height: 1.5;
+         border: 1px solid $line-color;
+         background-color: #fff;
+      }
+   }
+
+.button-group {
+   button {
+      margin: 0;
+      background-color: $gray-lightest;
+      border-radius: 0;
+      float: left;
+      border: 1px solid $line-color;
+      cursor: pointer;
+
+      &:first-of-type {
+         border-top-left-radius: $border-radius-lg;
+         border-bottom-left-radius: $border-radius-lg;
+      }
+      &:last-of-type {
+         border-top-right-radius: $border-radius-lg;
+         border-bottom-right-radius: $border-radius-lg;
+      }
+   }
+   
+   .selected {
+      background-color: $gray-light;
+   }
 }
