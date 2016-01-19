@@ -33,12 +33,6 @@
             <button [class.selected]="viewOptions.highlightType === highlightTypes.ROWS" (click)="viewOptions.highlightType = highlightTypes.ROWS">rows</button>
             <button [class.selected]="viewOptions.highlightType === highlightTypes.COST" (click)="viewOptions.highlightType = highlightTypes.COST">cost</button>
          </div>
-         <!-- <select [(ngModel)]="viewOptions.highlightType">
-            <option value="{{highlightTypes.NONE}}">{{highlightTypes.NONE}}</option>
-            <option value="{{highlightTypes.DURATION}}">{{highlightTypes.DURATION}}</option>
-            <option value="{{highlightTypes.ROWS}}">{{highlightTypes.ROWS}}</option>
-            <option value="{{highlightTypes.COST}}">{{highlightTypes.COST}}</option>
-         </select> -->
       </li>
    </ul>
 </div>
@@ -50,7 +44,6 @@
          <i class="fa fa-pencil"></i>
       </button>
    </h2>
-
 
    <div *ngIf="viewOptions.showPlanStats" class="plan-stats">
       <div>

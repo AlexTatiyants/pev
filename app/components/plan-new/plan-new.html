@@ -1,5 +1,6 @@
 <div class="page">
    <span class="text-muted">For best results, use EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)</span>
+   <button class="btn btn-link" (click)="prefill()">create a sample plan</button>
   <div>
     <input placeholder="name (optional)" class="input-box input-box-main" type="text" [(ngModel)]="newPlanName">
     <button class="btn btn-default btn-lg pad-top pull-right" (click)="submitPlan()">submit</button>
