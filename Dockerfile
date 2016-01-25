@@ -1,11 +1,17 @@
-FROM alpine:latest
+FROM debian:jessie
 
-RUN apk update && apk add g++ make nodejs python ruby
+RUN apt-get update && apt-get -y install apt-transport-https curl g++ make python ruby
+
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+
+RUN apt-get -y install nodejs
 
 COPY . /var/www/pev
 
 WORKDIR /var/www/pev
 
-RUN npm install --unsafe-perm
+RUN npm install -g gulp
 
-CMD npm start
+RUN npm install
+
+CMD cd /var/www/pev && npm start
