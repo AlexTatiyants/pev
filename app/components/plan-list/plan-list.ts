@@ -20,6 +20,7 @@ export class PlanList {
     newPlanContent: any;
     newPlanId: string;
     openDialog: boolean = false;
+    planToDelete: IPlan;
 
     constructor(private _planService: PlanService) { }
 
@@ -27,13 +28,15 @@ export class PlanList {
         this.plans = this._planService.getPlans();
     }
 
-    requestDelete() {
+    requestDelete(plan) {
         this.openDialog = true;
+        this.planToDelete = plan;
     }
 
     deletePlan(plan) {
         this.openDialog = false;
-        this._planService.deletePlan(plan);
+        console.log(this.planToDelete);
+        this._planService.deletePlan(this.planToDelete);
         this.plans = this._planService.getPlans();
     }
 

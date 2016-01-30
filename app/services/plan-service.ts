@@ -49,7 +49,7 @@ export class PlanService {
 
         for (var i in localStorage) {
             if (_.startsWith(i, this.PEV_PLAN_TAG)) {
-               plans.push(JSON.parse(localStorage[i]));
+                plans.push(JSON.parse(localStorage[i]));
             }
         }
 

@@ -5,26 +5,26 @@
 
   <table class="table">
     <tr *ngFor="#plan of plans">
+      <!-- this is a hack that should be converted to a proper dialog once that is available in angular 2-->
+      <div *ngIf="openDialog">
+          <div class="modal-backdrop"></div>
+          <div class="modal">
+             <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">You're about to delete plan "{{planToDelete.name}}". Are you sure?</div>
+                  <div class="modal-footer">
+                     <button class="btn btn-primary" (click)="deletePlan()">Yes</button>
+                     <button class="btn btn-default" (click)="cancelDelete()">No</button>
+                  </div>
+              </div>
+             </div>
+          </div>
+      </div>
+
       <td width="30%"><a [routerLink]="['/PlanView', {id: plan.id}]">{{plan.name}}</a></td>
       <td>created on {{plan.createdOn | momentDate }}</td>
-      <td class="align-right"><button class="btn btn-danger" (click)="requestDelete()">
+      <td class="align-right"><button class="btn btn-danger" (click)="requestDelete(plan)">
         <i class="fa fa-trash"></i>delete</button>
-        <!-- this is a hack that should be converted to a proper dialog once that is available in angular 2-->
-        <div *ngIf="openDialog">
-           <div class="modal-backdrop"></div>
-
-           <div class="modal">
-              <div class="modal-dialog">
-                 <div class="modal-content">
-                    <div class="modal-body">You're about to delete this plan. Are you sure?</div>
-                    <div class="modal-footer">
-                       <button class="btn btn-primary" (click)="deletePlan(plan)">Yes</button>
-                       <button class="btn btn-default" (click)="cancelDelete()">No</button>
-                    </div>
-                </div>
-              </div>
-           </div>
-        </div>
      </td>
     </tr>
   </table>
