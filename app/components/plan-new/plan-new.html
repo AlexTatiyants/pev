@@ -9,6 +9,7 @@
     <button class="btn btn-default btn-lg pad-top pull-right" (click)="submitPlan()">submit</button>
   </div>
 
+  <p *ngIf="validationMessage" class="error-message">{{validationMessage}}</p>
   <textarea placeholder="paste execution plan" class="input-box input-box-lg" [(ngModel)]="newPlanContent"></textarea>
   <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg" [(ngModel)]="newPlanQuery"></textarea>
 </div>

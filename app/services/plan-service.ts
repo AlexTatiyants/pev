@@ -73,6 +73,15 @@ export class PlanService {
         return plan;
     }
 
+    isJsonString(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
     analyzePlan(plan: IPlan) {
         this.processNode(plan.content.Plan);
         plan.content[this.MAXIMUM_ROWS_PROP] = this._maxRows;

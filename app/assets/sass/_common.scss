@@ -25,6 +25,10 @@ body, input, a, button, textarea {
 	color: $text-color-light;
 }
 
+.text-warning {
+   color: $alert-color;
+}
+
 .hero-container {
    margin: $padding-lg * 3;
    font-size: $font-size-xl;

@@ -16,19 +16,28 @@ export class PlanNew {
     newPlanContent: string;
     newPlanQuery: string;
     newPlan: IPlan;
+    validationMessage: string;
 
-    constructor( private _router: Router, private _planService: PlanService) { }
+    constructor(private _router: Router, private _planService: PlanService) { }
 
     submitPlan() {
+        // remove psql generated header
+        this.newPlanContent = this.newPlanContent.replace('QUERY PLAN', '');
+
+        if (!this._planService.isJsonString(this.newPlanContent)) {
+            this.validationMessage = 'The string you submitted is not valid JSON'
+            return;
+        }
+
         this.newPlan = this._planService.createPlan(this.newPlanName, this.newPlanContent, this.newPlanQuery);
-        this._router.navigate( ['PlanView', { id: this.newPlan.id }] );
+        this._router.navigate(['PlanView', { id: this.newPlan.id }]);
     }
 
     prefill() {
-      this.newPlanName = 'Sample plan';
-      this.newPlanContent = SAMPLE_JSON;
-      this.newPlanQuery = SAMPLE_QUERY;
-   }
+        this.newPlanName = 'Sample plan';
+        this.newPlanContent = SAMPLE_JSON;
+        this.newPlanQuery = SAMPLE_QUERY;
+    }
 }
 export var SAMPLE_JSON = `[
   {

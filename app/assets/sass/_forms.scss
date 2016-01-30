@@ -29,5 +29,10 @@
       border: 1px solid $line-color;
       padding: $padding-lg;
     }
+}
 
+.error-message {
+   background-color: $alert-color;
+   padding: $padding-base;
+   color: #fff;
 }
