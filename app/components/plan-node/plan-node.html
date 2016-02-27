@@ -1,8 +1,11 @@
-<div class="plan-node" [class.expanded]="showDetails" [class.compact]="viewOptions.showCompactView">
+<div class="plan-node"
+   [class.expanded]="showDetails"
+   [class.compact]="viewOptions.viewMode === viewModes.COMPACT"
+   [class.dot]="viewOptions.viewMode === viewModes.DOT">
+
    <header (click)="showDetails = !showDetails" tooltip="view node details">
-      <h4>{{node[_planService.NODE_TYPE_PROP] | uppercase}}
-      </h4>
-      <span *ngIf="!viewOptions.showCompactView">
+      <h4>{{getNodeName()}}</h4>
+      <span *ngIf="viewOptions.viewMode === viewModes.FULL || showDetails">
          <span class="node-duration">{{node[_planService.ACTUAL_DURATION_PROP] | duration}}<span class="text-muted">{{node[_planService.ACTUAL_DURATION_PROP] | durationUnit}}
              | </span><strong>{{executionTimePercent}}</strong>
             <span class="text-muted">%</span>
@@ -10,12 +13,12 @@
       </span>
    </header>
 
-   <button *ngIf="plan.query && !viewOptions.showCompactView" tooltip="view corresponding query"
+   <button *ngIf="plan.query && viewOptions.viewMode === viewModes.FULL" tooltip="view corresponding query"
       class="btn btn-sm btn-default btn-slim pull-right" (click)="showQuery = !showQuery">
       <i class="fa fa-database"></i>
    </button>
 
-   <div *ngIf="!viewOptions.showCompactView">
+   <div *ngIf="viewOptions.viewMode === viewModes.FULL">
       <div class="relation-name" *ngIf="node[_planService.RELATION_NAME_PROP]">
          <span class="text-muted">on </span>
          <span *ngIf="node[_planService.SCHEMA_PROP]">{{node[_planService.SCHEMA_PROP]}}.</span>{{node[_planService.RELATION_NAME_PROP]}}
@@ -33,20 +36,21 @@
       <div class="relation-name" *ngIf="node[_planService.HASH_CONDITION_PROP]"><span class="text-muted">
          on</span> {{node[_planService.HASH_CONDITION_PROP]}}</div>
    </div>
+
    <div class="tags" *ngIf="viewOptions.showTags && tags.length > 0">
-      <span *ngFor="#tag of tags">{{tag}}</span>
+      <span *ngFor="#tag of tags">{{getTagName(tag)}}</span>
    </div>
 
    <div *ngIf="currentHighlightType !== highlightTypes.NONE">
       <div class="node-bar-container">
          <span class="node-bar" [style.width]="barWidth+'px'" [style.backgroundColor]="backgroundColor"></span>
       </div>
-      <span class="node-bar-label">
+      <span class="node-bar-label" *ngIf="shouldShowNodeBarLabel()">
          <span class="text-muted">{{viewOptions.highlightType}}:</span> {{highlightValue | number:'.0-2'}}
       </span>
    </div>
 
-   <div class="planner-estimate" *ngIf="viewOptions.showPlannerEstimate">
+   <div class="planner-estimate" *ngIf="shouldShowPlannerEstimate()">
       <span *ngIf="plannerRowEstimateDirection === estimateDirections.over"><strong>over</strong> estimated rows</span>
       <span *ngIf="plannerRowEstimateDirection === estimateDirections.under"><strong>under</strong> estimated rows</span>
       <span> by <strong>{{plannerRowEstimateValue | number}}</strong>x</span>
