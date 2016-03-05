@@ -10,6 +10,6 @@
   </div>
 
   <p *ngIf="validationMessage" class="error-message">{{validationMessage}}</p>
-  <textarea placeholder="paste execution plan" class="input-box input-box-lg" [(ngModel)]="newPlanContent"></textarea>
-  <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg" [(ngModel)]="newPlanQuery"></textarea>
+  <textarea placeholder="paste execution plan" class="input-box input-box-lg code" [(ngModel)]="newPlanContent"></textarea>
+  <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg code" [(ngModel)]="newPlanQuery"></textarea>
 </div>
