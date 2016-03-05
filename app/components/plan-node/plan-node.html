@@ -35,6 +35,9 @@
          using</span> {{node[_planService.INDEX_NAME_PROP]}}</div>
       <div class="relation-name" *ngIf="node[_planService.HASH_CONDITION_PROP]"><span class="text-muted">
          on</span> {{node[_planService.HASH_CONDITION_PROP]}}</div>
+      <div class="relation-name" *ngIf="node[_planService.CTE_NAME_PROP]">
+            <span class="text-muted">CTE</span> {{node[_planService.CTE_NAME_PROP]}}
+      </div>
    </div>
 
    <div class="tags" *ngIf="viewOptions.showTags && tags.length > 0">
