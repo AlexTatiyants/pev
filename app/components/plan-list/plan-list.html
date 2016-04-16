@@ -3,7 +3,7 @@
       Welcome to PEV! Please <a [routerLink]="['/PlanNew']">submit</a> a plan for visualization
    </div>
 
-  <table class="table">
+  <table class="table pad-bottom">
     <tr *ngFor="#plan of plans">
       <!-- this is a hack that should be converted to a proper dialog once that is available in angular 2-->
       <div *ngIf="openDialog">

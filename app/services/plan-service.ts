@@ -56,7 +56,10 @@ export class PlanService {
             }
         }
 
-        return plans;
+        return _.chain(plans)
+        .sortBy('createdOn')
+        .reverse()
+        .value();
     }
 
     getPlan(id: string): IPlan {
