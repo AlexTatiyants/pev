@@ -9,20 +9,21 @@
          <input id="showPlanStats" type="checkbox" [(ngModel)]="viewOptions.showPlanStats">
          <label class="clickable" for="showPlanStats"> show plan stats</label>
       </li>
-
-      <li>
-         <input id="showCompactView" type="checkbox" [(ngModel)]="viewOptions.showCompactView">
-         <label class="clickable" for="showCompactView"> show compact view</label>
-      </li>
-
       <li>
          <input id="showPlannerEstimate" type="checkbox" [(ngModel)]="viewOptions.showPlannerEstimate">
          <label class="clickable" for="showPlannerEstimate"> show planner estimate</label>
       </li>
-
       <li>
          <input id="showTags" type="checkbox" [(ngModel)]="viewOptions.showTags">
          <label class="clickable" for="showTags"> show analysis tags</label>
+      </li>
+      <li>
+         <label>view mode: </label>
+         <div class="button-group">
+            <button [class.selected]="viewOptions.viewMode == viewModes.FULL" (click)="viewOptions.viewMode = viewModes.FULL">full</button>
+            <button [class.selected]="viewOptions.viewMode == viewModes.COMPACT" (click)="viewOptions.viewMode = viewModes.COMPACT">compact</button>
+            <button [class.selected]="viewOptions.viewMode == viewModes.DOT" (click)="viewOptions.viewMode = viewModes.DOT">dot</button>
+         </div>
       </li>
 
       <li>

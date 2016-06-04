@@ -20,3 +20,10 @@ You may also need to install tsd and compass:
 npm install tsd -g
 gem install compass
 ```
+
+## Build
+To build, run the build command for a specific environment. For example, the following will create a production distribution:
+
+```
+npm start build.prod
+```

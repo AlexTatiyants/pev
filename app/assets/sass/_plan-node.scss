@@ -127,8 +127,27 @@
 
 .expanded {
    width: 400px !important;
+   overflow: visible !important;
+   padding: $padding-base $padding-lg !important;
+   .tags span {
+      margin-right: $padding-sm !important;
+   }
 }
 
 .compact {
    width: 140px;
+}
+
+.dot {
+   width: 30px;
+   overflow: hidden;
+   padding: $padding-sm;
+
+   .tags span {
+      margin-right: 1px;
+   }
+
+   .node-bar-container {
+      margin-top: $padding-sm;
+   }
 }

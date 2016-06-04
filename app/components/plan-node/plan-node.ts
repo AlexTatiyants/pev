@@ -1,6 +1,6 @@
 import {IPlan} from '../../interfaces/iplan';
 import {Component, OnInit} from 'angular2/core';
-import {HighlightType, EstimateDirection} from '../../enums';
+import {HighlightType, EstimateDirection, ViewMode} from '../../enums';
 import {DurationPipe, DurationUnitPipe} from '../../pipes';
 
 import {PlanService} from '../../services/plan-service';
@@ -23,6 +23,7 @@ export class PlanNode {
     // consts
     NORMAL_WIDTH: number = 220;
     COMPACT_WIDTH: number = 140;
+    DOT_WIDTH: number = 30;
     EXPANDED_WIDTH: number = 400;
 
     MIN_ESTIMATE_MISS: number = 100;
@@ -58,6 +59,7 @@ export class PlanNode {
     // expose enum to view
     estimateDirections = EstimateDirection;
     highlightTypes = HighlightType;
+    viewModes = ViewMode;
 
     constructor(private _planService: PlanService,
         private _syntaxHighlightService: SyntaxHighlightService,
@@ -122,7 +124,17 @@ export class PlanNode {
     }
 
     calculateBar() {
-        this.barContainerWidth = this.viewOptions.showCompactView ? this.COMPACT_WIDTH : this.NORMAL_WIDTH;
+        switch (this.viewOptions.viewMode) {
+            case ViewMode.DOT:
+                this.barContainerWidth = this.DOT_WIDTH;
+                break;
+            case ViewMode.COMPACT:
+                this.barContainerWidth = this.COMPACT_WIDTH;
+                break;
+            default:
+                this.barContainerWidth = this.NORMAL_WIDTH;
+                break;
+        }
 
         // expanded view width trumps others
         if (this.currentExpandedView) {
@@ -184,4 +196,43 @@ export class PlanNode {
     getNodeTypeDescription() {
         return this._helpService.getNodeTypeDescription(this.node[this._planService.NODE_TYPE_PROP]);
     }
+
+    getNodeName() {
+        if (this.viewOptions.viewMode === ViewMode.DOT && !this.showDetails) {
+            return this.node[this._planService.NODE_TYPE_PROP].replace(/[^A-Z]/g, '').toUpperCase();
+        }
+
+        return (this.node[this._planService.NODE_TYPE_PROP]).toUpperCase();
+    }
+
+    getTagName(tagName: String) {
+        if (this.viewOptions.viewMode === ViewMode.DOT && !this.showDetails) {
+            return tagName.charAt(0);
+        }
+        return tagName;
+    }
+
+    shouldShowPlannerEstimate() {
+        if (this.viewOptions.showPlannerEstimate && this.showDetails) {
+            return true;
+        }
+
+        if (this.viewOptions.viewMode === ViewMode.DOT) {
+            return false;
+        }
+
+        return this.viewOptions.showPlannerEstimate;
+    }
+
+    shouldShowNodeBarLabel() {
+      if (this.showDetails) {
+         return true;
+      }
+
+      if (this.viewOptions.viewMode === ViewMode.DOT) {
+         return false;
+      }
+
+      return true;
+   }
 }

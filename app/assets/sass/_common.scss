@@ -25,6 +25,10 @@ body, input, a, button, textarea {
 	color: $text-color-light;
 }
 
+.text-warning {
+   color: $alert-color;
+}
+
 .hero-container {
    margin: $padding-lg * 3;
    font-size: $font-size-xl;
@@ -52,7 +56,7 @@ a {
    cursor: pointer;
 }
 
-code {
+code, .code {
    font-family: $font-family-mono;
    font-weight: 600;
 }
@@ -63,6 +67,10 @@ code {
 
 .pad-top {
    margin-top: $padding-lg;
+}
+
+.pad-bottom {
+   margin-bottom: $padding-lg;
 }
 
 [tooltip]:before {

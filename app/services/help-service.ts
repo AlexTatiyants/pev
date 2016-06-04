@@ -26,5 +26,8 @@ export var NODE_DESCRIPTIONS = {
    from the index and do not read from the corresponding table.`,
    'BITMAP HEAP SCAN': 'searches through the pages returned by the <strong>Bitmap Index Scan</strong> for relevant rows.',
    'BITMAP INDEX SCAN': `uses a <strong>Bitmap Index</strong> (index which uses 1 bit per page) to find all relevant pages.
-   Results of this node are fed to the <strong>Bitmap Heap Scan</strong>.`
+   Results of this node are fed to the <strong>Bitmap Heap Scan</strong>.`,
+   'CTE SCAN': `performs a sequential scan of <strong>Common Table Expression (CTE) query</strong> results. Note that
+   results of a CTE are materialized (calculated and temporarily stored).`
+
 };

@@ -2,7 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {IPlan} from '../../interfaces/iplan';
-import {HighlightType} from '../../enums';
+import {HighlightType, ViewMode} from '../../enums';
 import {PlanNode} from '../plan-node/plan-node';
 import {PlanService} from '../../services/plan-service';
 import {SyntaxHighlightService} from '../../services/syntax-highlight-service';
@@ -26,13 +26,15 @@ export class PlanView {
         showHighlightBar: true,
         showPlannerEstimate: false,
         showTags: true,
-        highlightType: HighlightType.NONE
+        highlightType: HighlightType.NONE,
+        viewMode: ViewMode.FULL
     };
 
     showPlannerEstimate: boolean = true;
     showMenu: boolean = false;
 
     highlightTypes = HighlightType; // exposing the enum to the view
+    viewModes = ViewMode;
 
     constructor(private _planService: PlanService, routeParams: RouteParams) {
         this.id = routeParams.get('id');

@@ -22,12 +22,17 @@
 
     &-lg {
       width: 98%;
-      height: 280px;
+      height: 210px;
       margin-bottom: $padding-base;
       margin-bottom: $padding-lg;
       border-radius: $border-radius-base;
       border: 1px solid $line-color;
       padding: $padding-lg;
     }
+}
 
+.error-message {
+   background-color: $alert-color;
+   padding: $padding-base;
+   color: #fff;
 }

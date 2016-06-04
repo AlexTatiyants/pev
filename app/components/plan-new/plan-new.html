@@ -1,11 +1,15 @@
 <div class="page">
-   <span class="text-muted">For best results, use EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)</span>
-   <button class="btn btn-link" (click)="prefill()">create a sample plan</button>
+   <button class="pull-right btn btn-link" (click)="prefill()">create a sample plan</button>
+
+   <span class="text-muted">For best results, use <code>EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)</code><br>
+      Psql users can export the plan to a file using <code>psql -qAt -f explain.sql > analyze.json</code></span>
+   <p class="pad-top">DISCLAIMER: Pev stores your plans locally (localStorage) and will not send them anywhere.</p>
   <div>
     <input placeholder="name (optional)" class="input-box input-box-main" type="text" [(ngModel)]="newPlanName">
     <button class="btn btn-default btn-lg pad-top pull-right" (click)="submitPlan()">submit</button>
   </div>
 
-  <textarea placeholder="paste execution plan" class="input-box input-box-lg" [(ngModel)]="newPlanContent"></textarea>
-  <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg" [(ngModel)]="newPlanQuery"></textarea>
+  <p *ngIf="validationMessage" class="error-message">{{validationMessage}}</p>
+  <textarea placeholder="paste execution plan" class="input-box input-box-lg code" [(ngModel)]="newPlanContent"></textarea>
+  <textarea placeholder="paste corresponding SQL query" class="input-box input-box-lg code" [(ngModel)]="newPlanQuery"></textarea>
 </div>
