@@ -6,6 +6,8 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 
 RUN apt-get -y install nodejs
 
+COPY tsdrc ~/.tsdrc
+
 COPY . /var/www/pev
 
 WORKDIR /var/www/pev
