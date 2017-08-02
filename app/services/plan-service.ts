@@ -67,11 +67,17 @@ export class PlanService {
     }
 
     createPlan(planName: string, planContent: string, planQuery): IPlan {
+        var parsedContent = JSON.parse(planContent);
+
+        if (Array.isArray(parsedContent)) {
+            parsedContent = parsedContent[0];
+        }
+
         var plan: IPlan = {
             id: this.PEV_PLAN_TAG + new Date().getTime().toString(),
             name: planName || 'plan created on ' + moment().format('LLL'),
             createdOn: new Date(),
-            content: JSON.parse(planContent)[0],
+            content: parsedContent,
             query: planQuery
         };
 
