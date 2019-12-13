@@ -24,7 +24,7 @@ export class PlanService {
     // computed by pev
     COMPUTED_TAGS_PROP: string = '*Tags';
 
-    COSTLIEST_NODE_PROP: string = '*Costiest Node (by cost)';
+    COSTLIEST_NODE_PROP: string = '*Costliest Node (by cost)';
     LARGEST_NODE_PROP: string = '*Largest Node (by rows)';
     SLOWEST_NODE_PROP: string = '*Slowest Node (by duration)';
 
